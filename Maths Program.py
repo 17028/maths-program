@@ -18,6 +18,7 @@ SSBUTTONHEIGHT = 4
 DIFFBG = "spring green3"
 INTBG = "royal blue2"
 SMALLBUTTONFONT = "Arial"
+testvar = "lessonInfo1"
 
 #The main class, defining the root window
 class Maths(tk.Tk):
@@ -33,7 +34,10 @@ class Maths(tk.Tk):
         if self._frame is not None:
             self._frame.destroy()
         self._frame = new_frame
-        self._frame.pack(expand=TRUE,fill="both")
+        if str(frame_class) == ("<class '__main__." + testvar + "'>"):
+            self._frame.pack(expand=TRUE,fill="both")
+        else:
+            self._frame.pack()        
 
 #Title screen widgets
 class titleScreen(tk.Frame):
@@ -51,8 +55,8 @@ class lessonSelect(tk.Frame):
         tk.Frame.__init__(self,master)
         self.config(bg=BGCOLOUR)
         tk.Label(self,text="Lessons",font=TITLEFONT,bg=BGCOLOUR) .grid(column=1,row=0)
-        tk.Button(self,text='Differentiation;Basics',width=SSBUTTONWIDTH,height=SSBUTTONHEIGHT,command=lambda:master.switch_frame(lessonInfo),bg=DIFFBG,font = SMALLBUTTONFONT) .grid(column=0,row=1,padx=BUTTONGAPX,pady=BUTTONGAPY)
-        tk.Button(self,text='Differentiation;Gradients',width=SSBUTTONWIDTH,height=SSBUTTONHEIGHT,command="",bg=DIFFBG,font = SMALLBUTTONFONT) .grid(column=1,row=1,padx=BUTTONGAPX)
+        tk.Button(self,text='Differentiation;Basics',width=SSBUTTONWIDTH,height=SSBUTTONHEIGHT,command=lambda:master.switch_frame(lessonInfo1),bg=DIFFBG,font = SMALLBUTTONFONT) .grid(column=0,row=1,padx=BUTTONGAPX,pady=BUTTONGAPY)
+        tk.Button(self,text='Differentiation;Gradients',width=SSBUTTONWIDTH,height=SSBUTTONHEIGHT,command=lambda:master.switch_frame(lessonInfo2),bg=DIFFBG,font = SMALLBUTTONFONT) .grid(column=1,row=1,padx=BUTTONGAPX)
         tk.Button(self,text='Differentiation;Tangents',width=SSBUTTONWIDTH,height=SSBUTTONHEIGHT,command="",bg=DIFFBG,font = SMALLBUTTONFONT) .grid(column=2,row=1,padx=BUTTONGAPX)
         tk.Button(self,text='Differentiation;Δ Graident',width=SSBUTTONWIDTH,height=SSBUTTONHEIGHT,command="",bg=DIFFBG,font = SMALLBUTTONFONT) .grid(column=0,row=2,pady=BUTTONGAPY)
         tk.Button(self,text='Differentiation;Max/Min',width=SSBUTTONWIDTH,height=SSBUTTONHEIGHT,command="",bg=DIFFBG,font = SMALLBUTTONFONT) .grid(column=1,row=2)
@@ -65,26 +69,34 @@ class lessonSelect(tk.Frame):
     def switchLessonFrame(self,text):
         pass 
 
+
 #Lesson info screen widgets
 class lessonInfo(tk.Frame):
     def __init__(self,master):
         tk.Frame.__init__(self,master)  
         self.config(bg=BGCOLOUR)
-        title = tk.Label(self,text='Differentiation;Basics',font = HEADINGFONT, bg = BGCOLOUR)
-        title.place(relx = 0.5, rely = 0.1, anchor="center")
-        imagefile = tk.PhotoImage(file="LeibnizNotation.png")      
-        photolabel = tk.Label(self,image=imagefile,borderwidth=0)
-        photolabel.place(relx=0.5,rely=0.4,anchor="center")
-        photolabel.img = imagefile      
-        explanation = tk.Label(self,text="This lesson will explain to you the basics behind differentation, how to differentiate a quadratic and what differentiation actually does.",
+        self.title = tk.Label(self,text='Differentiation;Basics',font = HEADINGFONT, bg = BGCOLOUR)
+        self.title.place(relx = 0.5, rely = 0.1, anchor="center")
+        self.imagefile = tk.PhotoImage(file="LeibnizNotation.png") 
+        self.photolabel = tk.Label(self,image=self.imagefile,borderwidth=0)
+        self.photolabel.place(relx=0.5,rely=0.4,anchor="center")
+        self.photolabel.img = self.imagefile      
+        self.explanation = tk.Label(self,text="This lesson will explain to you the basics behind differentation, how to differentiate a quadratic and what differentiation actually does.",
         font=BUTTONFONT,wraplength = 1000, bg = BGCOLOUR)
-        explanation.place(relx = 0.5,rely=0.7,anchor="center")
-        pagenumber = tk.Label(self,text="Page 1/1",bg=BGCOLOUR,font=BUTTONFONT)
-        pagenumber.place(relx = 0.5,rely=0.9,anchor="center")
-        nextbutton = tk.Button(self,text="Next",bg="spring green3",font=BUTTONFONT)
-        nextbutton.place(relx = 0.8,rely=0.9,anchor="center")
-        backbutton = tk.Button(self,text="Back",bg="orange red2",font=BUTTONFONT,command=lambda:master.switch_frame(lessonSelect))
-        backbutton.place(relx = 0.2,rely=0.9,anchor="center")
+        self.explanation.place(relx = 0.5,rely=0.7,anchor="center")
+        self.pagenumber = tk.Label(self,text="Page 1/1",bg=BGCOLOUR,font=BUTTONFONT)
+        self.pagenumber.place(relx = 0.5,rely=0.9,anchor="center")
+        self.nextbutton = tk.Button(self,text="Next",bg="spring green3",font=BUTTONFONT)
+        self.nextbutton.place(relx = 0.8,rely=0.9,anchor="center")
+        self.backbutton = tk.Button(self,text="Back",bg="orange red2",font=BUTTONFONT,command=lambda:master.switch_frame(lessonSelect))
+        self.backbutton.place(relx = 0.2,rely=0.9,anchor="center")
+    
+
+class lessonInfo1(lessonInfo):
+    def __init__(self,master):
+        lessonInfo.__init__(self,master)
+        tk.Label(self,text="hello") .place(relx=0.5,rely=0.9,anchor="center")
+        self.nextbutton.config(text="next2")
 
 #Defining the main subroutine
 def main():
