@@ -34,14 +34,17 @@ class Maths(tk.Tk):
         if self._frame is not None:
             self._frame.destroy()
         self._frame = new_frame
-        if str(frame_class) == ("<class '__main__." + testvar + "'>"):
+        if self._frame.frametype == ("place"):
             self._frame.pack(expand=TRUE,fill="both")
+        elif self._frame.frametype == ("grid"):
+            self._frame.pack()
         else:
-            self._frame.pack()        
+            print("error! no frametype specified")
 
 #Title screen widgets
 class titleScreen(tk.Frame):
     def __init__(self,master):
+        self.frametype = "grid"
         tk.Frame.__init__(self,master)
         self.config(bg=BGCOLOUR)
         tk.Label(self,text="Calculus",font=TITLEFONT,bg=BGCOLOUR) .grid(column=1,pady=100)
@@ -52,32 +55,33 @@ class titleScreen(tk.Frame):
 #Lesson select screen widgets
 class lessonSelect(tk.Frame):
     def __init__(self,master):
+        self.frametype = "grid"
         tk.Frame.__init__(self,master)
         self.config(bg=BGCOLOUR)
         tk.Label(self,text="Lessons",font=TITLEFONT,bg=BGCOLOUR) .grid(column=1,row=0)
         tk.Button(self,text='Differentiation;Basics',width=SSBUTTONWIDTH,height=SSBUTTONHEIGHT,command=lambda:master.switch_frame(lessonInfo1),bg=DIFFBG,font = SMALLBUTTONFONT) .grid(column=0,row=1,padx=BUTTONGAPX,pady=BUTTONGAPY)
         tk.Button(self,text='Differentiation;Gradients',width=SSBUTTONWIDTH,height=SSBUTTONHEIGHT,command=lambda:master.switch_frame(lessonInfo2),bg=DIFFBG,font = SMALLBUTTONFONT) .grid(column=1,row=1,padx=BUTTONGAPX)
-        tk.Button(self,text='Differentiation;Tangents',width=SSBUTTONWIDTH,height=SSBUTTONHEIGHT,command="",bg=DIFFBG,font = SMALLBUTTONFONT) .grid(column=2,row=1,padx=BUTTONGAPX)
-        tk.Button(self,text='Differentiation;Δ Graident',width=SSBUTTONWIDTH,height=SSBUTTONHEIGHT,command="",bg=DIFFBG,font = SMALLBUTTONFONT) .grid(column=0,row=2,pady=BUTTONGAPY)
-        tk.Button(self,text='Differentiation;Max/Min',width=SSBUTTONWIDTH,height=SSBUTTONHEIGHT,command="",bg=DIFFBG,font = SMALLBUTTONFONT) .grid(column=1,row=2)
-        tk.Button(self,text='Integration;Basics',width=SSBUTTONWIDTH,height=SSBUTTONHEIGHT,command="",bg=INTBG,font = SMALLBUTTONFONT) .grid(column=2,row=2)
-        tk.Button(self,text='Integration;Functions',width=SSBUTTONWIDTH,height=SSBUTTONHEIGHT,command="",bg=INTBG,font = SMALLBUTTONFONT) .grid(column=0,row=3)
-        tk.Button(self,text='Integration;Kinematics',width=SSBUTTONWIDTH,height=SSBUTTONHEIGHT,command="",bg= INTBG,font = SMALLBUTTONFONT) .grid(column=1,row=3,pady=BUTTONGAPY)
-        tk.Button(self,text='Final Quiz',width=SSBUTTONWIDTH,height=SSBUTTONHEIGHT,command="",bg= "chocolate2",font = SMALLBUTTONFONT) .grid(column=2,row=3)
+        tk.Button(self,text='Differentiation;Tangents',width=SSBUTTONWIDTH,height=SSBUTTONHEIGHT,command=lambda:master.switch_frame(lessonInfo3),bg=DIFFBG,font = SMALLBUTTONFONT) .grid(column=2,row=1,padx=BUTTONGAPX)
+        tk.Button(self,text='Differentiation;Δ Graident',width=SSBUTTONWIDTH,height=SSBUTTONHEIGHT,command=lambda:master.switch_frame(lessonInfo4),bg=DIFFBG,font = SMALLBUTTONFONT) .grid(column=0,row=2,pady=BUTTONGAPY)
+        tk.Button(self,text='Differentiation;Min/Max',width=SSBUTTONWIDTH,height=SSBUTTONHEIGHT,command=lambda:master.switch_frame(lessonInfo5),bg=DIFFBG,font = SMALLBUTTONFONT) .grid(column=1,row=2)
+        tk.Button(self,text='Integration;Basics',width=SSBUTTONWIDTH,height=SSBUTTONHEIGHT,command=lambda:master.switch_frame(lessonInfo6),bg=INTBG,font = SMALLBUTTONFONT) .grid(column=2,row=2)
+        tk.Button(self,text='Integration;Functions',width=SSBUTTONWIDTH,height=SSBUTTONHEIGHT,command=lambda:master.switch_frame(lessonInfo7),bg=INTBG,font = SMALLBUTTONFONT) .grid(column=0,row=3)
+        tk.Button(self,text='Integration;Kinematics',width=SSBUTTONWIDTH,height=SSBUTTONHEIGHT,command=lambda:master.switch_frame(lessonInfo8),bg= INTBG,font = SMALLBUTTONFONT) .grid(column=1,row=3,pady=BUTTONGAPY)
+        tk.Button(self,text='Final Quiz',width=SSBUTTONWIDTH,height=SSBUTTONHEIGHT,command=lambda:master.switch_frame(lessonInfo9),bg= "chocolate2",font = SMALLBUTTONFONT) .grid(column=2,row=3)
         tk.Button(self,text='Back',width=SSBUTTONWIDTH,height=SSBUTTONHEIGHT,command=lambda:master.switch_frame(titleScreen),bg="orange red2",font = SMALLBUTTONFONT) .grid(column=1,row=4,pady=BACKBUTTONGAPY)
 
     def switchLessonFrame(self,text):
         pass 
 
-
 #Lesson info screen widgets
 class lessonInfo(tk.Frame):
     def __init__(self,master):
+        self.frametype = "place"
         tk.Frame.__init__(self,master)  
         self.config(bg=BGCOLOUR)
         self.title = tk.Label(self,text='Differentiation;Basics',font = HEADINGFONT, bg = BGCOLOUR)
         self.title.place(relx = 0.5, rely = 0.1, anchor="center")
-        self.imagefile = tk.PhotoImage(file="LeibnizNotation.png") 
+        self.imagefile = tk.PhotoImage(file="1.png") 
         self.photolabel = tk.Label(self,image=self.imagefile,borderwidth=0)
         self.photolabel.place(relx=0.5,rely=0.4,anchor="center")
         self.photolabel.img = self.imagefile      
@@ -91,12 +95,65 @@ class lessonInfo(tk.Frame):
         self.backbutton = tk.Button(self,text="Back",bg="orange red2",font=BUTTONFONT,command=lambda:master.switch_frame(lessonSelect))
         self.backbutton.place(relx = 0.2,rely=0.9,anchor="center")
     
-
 class lessonInfo1(lessonInfo):
     def __init__(self,master):
         lessonInfo.__init__(self,master)
-        tk.Label(self,text="hello") .place(relx=0.5,rely=0.9,anchor="center")
-        self.nextbutton.config(text="next2")
+
+class lessonInfo2(lessonInfo):
+    def __init__(self,master):
+        lessonInfo.__init__(self,master)
+        self.title.config(text="Differentiation;Gradients")
+        self.imagefile.config(file="2.png")
+        self.explanation.config(text="This lesson will explain to you what a gradient is, how differentiation relates to gradients and how to use differentiation to find a graident.")
+
+class lessonInfo3(lessonInfo):
+    def __init__(self,master):
+        lessonInfo.__init__(self,master)
+        self.title.config(text="Differentiation;Tangents")
+        self.imagefile.config(file="2.png")
+        self.explanation.config(text="This lesson will explain to you what a gradient is, how differentiation relates to gradients and how to use differentiation to find a graident.")
+
+class lessonInfo4(lessonInfo):
+    def __init__(self,master):
+        lessonInfo.__init__(self,master)
+        self.title.config(text="Differentiation;Δ Graident")
+        self.imagefile.config(file="2.png")
+        self.explanation.config(text="This lesson will explain to you what a gradient is, how differentiation relates to gradients and how to use differentiation to find a graident.")
+
+class lessonInfo5(lessonInfo):
+    def __init__(self,master):
+        lessonInfo.__init__(self,master)
+        self.title.config(text="Differentiation;Min/Max")
+        self.imagefile.config(file="2.png")
+        self.explanation.config(text="This lesson will explain to you what a gradient is, how differentiation relates to gradients and how to use differentiation to find a graident.")
+
+class lessonInfo6(lessonInfo):
+    def __init__(self,master):
+        lessonInfo.__init__(self,master)
+        self.title.config(text="Integration;Basics")
+        self.imagefile.config(file="2.png")
+        self.explanation.config(text="This lesson will explain to you what a gradient is, how differentiation relates to gradients and how to use differentiation to find a graident.")
+
+class lessonInfo7(lessonInfo):
+    def __init__(self,master):
+        lessonInfo.__init__(self,master)
+        self.title.config(text="Integration;Functions")
+        self.imagefile.config(file="2.png")
+        self.explanation.config(text="This lesson will explain to you what a gradient is, how differentiation relates to gradients and how to use differentiation to find a graident.")
+
+class lessonInfo8(lessonInfo):
+    def __init__(self,master):
+        lessonInfo.__init__(self,master)
+        self.title.config(text="Integration;Kinematics")
+        self.imagefile.config(file="2.png")
+        self.explanation.config(text="This lesson will explain to you what a gradient is, how differentiation relates to gradients and how to use differentiation to find a graident.")
+
+class lessonInfo9(lessonInfo):
+    def __init__(self,master):
+        lessonInfo.__init__(self,master)
+        self.title.config(text="Final Quiz")
+        self.imagefile.config(file="shrek.gif")
+        self.explanation.config(text="This lesson will explain to you what a gradient is, how differentiation relates to gradients and how to use differentiation to find a graident.")
 
 #Defining the main subroutine
 def main():
