@@ -34,6 +34,7 @@ class Maths(tk.Tk):
         if self._frame is not None:
             self._frame.destroy()
         self._frame = new_frame
+        # Method for detecting what type of organization method the frame uses
         if self._frame.frametype == ("place"):
             self._frame.pack(expand=TRUE,fill="both")
         elif self._frame.frametype == ("grid"):
@@ -70,20 +71,19 @@ class LessonSelect(tk.Frame):
         tk.Button(self,text='Final Quiz',width=SSBUTTONWIDTH,height=SSBUTTONHEIGHT,command=lambda:master.switch_frame(LessonInfo9),bg= "chocolate2",font = SMALLBUTTONFONT) .grid(column=2,row=3)
         tk.Button(self,text='Back',width=SSBUTTONWIDTH,height=SSBUTTONHEIGHT,command=lambda:master.switch_frame(TitleScreen),bg="orange red2",font = SMALLBUTTONFONT) .grid(column=1,row=4,pady=BACKBUTTONGAPY)
 
-#The template for lesson information screens
-class LessonInfoTemplate(tk.Frame):
+#The template for lesson information screens, all lesson information screens will be LessonTemplate type objects
+class LessonTemplate(tk.Frame):
     def __init__(self,master):
         self.frametype = "place"
         tk.Frame.__init__(self,master)  
         self.config(bg=BGCOLOUR)
-        self.title = tk.Label(self,text='Differentiation;Basics',font = HEADINGFONT, bg = BGCOLOUR)
+        self.title = tk.Label(self,text="",font = HEADINGFONT, bg = BGCOLOUR)
         self.title.place(relx = 0.5, rely = 0.1, anchor="center")
-        self.imagefile = tk.PhotoImage(file="1.png") 
+        self.imagefile = tk.PhotoImage(file="") 
         self.photolabel = tk.Label(self,image=self.imagefile,borderwidth=0)
         self.photolabel.place(relx=0.5,rely=0.4,anchor="center")
         self.photolabel.img = self.imagefile      
-        self.explanation = tk.Label(self,text="This lesson will explain to you the basics behind differentation, how to differentiate a quadratic and what differentiation actually does.",
-        font=BUTTONFONT,wraplength = 1000, bg = BGCOLOUR)
+        self.explanation = tk.Label(self,text="",font=BUTTONFONT,wraplength = 1000, bg = BGCOLOUR)
         self.explanation.place(relx = 0.5,rely=0.7,anchor="center")
         self.pagenumber = tk.Label(self,text="Page 1/1",bg=BGCOLOUR,font=BUTTONFONT)
         self.pagenumber.place(relx = 0.5,rely=0.9,anchor="center")
@@ -92,66 +92,122 @@ class LessonInfoTemplate(tk.Frame):
         self.backbutton = tk.Button(self,text="Back",bg="orange red2",font=BUTTONFONT,command=lambda:master.switch_frame(LessonSelect))
         self.backbutton.place(relx = 0.2,rely=0.9,anchor="center")
 
-class LessonInfo1(LessonInfoTemplate):
+class LessonInfo1(LessonTemplate):
     def __init__(self,master):
-        LessonInfoTemplate.__init__(self,master)
+        LessonTemplate.__init__(self,master)
+        self.title.config(text="Differentiation;Basics")
+        self.imagefile.config(file="1.png")
+        self.pagenumber.config(text="1/6")
+        self.explanation.config(text="This lesson will explain to you the basics behind differentation, how to differentiate a quadratic and what differentiation actually does.")
+        self.nextbutton.config(command=lambda:master.switch_frame(Lesson1P1))
+        self.backbutton.config(command=lambda:master.switch_frame(LessonSelect))
 
-class LessonInfo2(LessonInfoTemplate):
+class LessonInfo2(LessonTemplate):
     def __init__(self,master):
-        LessonInfoTemplate.__init__(self,master)
+        LessonTemplate.__init__(self,master)
         self.title.config(text="Differentiation;Gradients")
         self.imagefile.config(file="2.png")
         self.explanation.config(text="This lesson will explain to you what a gradient is, how differentiation relates to gradients and how to use differentiation to find a graident.")
 
-class LessonInfo3(LessonInfoTemplate):
+class LessonInfo3(LessonTemplate):
     def __init__(self,master):
-        LessonInfoTemplate.__init__(self,master)
+        LessonTemplate.__init__(self,master)
         self.title.config(text="Differentiation;Tangents")
         self.imagefile.config(file="3.png")
         self.explanation.config(text="This lesson will explain to you what a tangent is, what a normal is, and how to use the gradient to find the equation of a tangent.")
 
-class LessonInfo4(LessonInfoTemplate):
+class LessonInfo4(LessonTemplate):
     def __init__(self,master):
-        LessonInfoTemplate.__init__(self,master)
+        LessonTemplate.__init__(self,master)
         self.title.config(text="Differentiation;Δ Graident")
         self.imagefile.config(file="4.png")
         self.explanation.config(text="This lesson will show you how to find increasing and decreasing functions using the changes (Δ) in gradient.")
 
-class LessonInfo5(LessonInfoTemplate):
+class LessonInfo5(LessonTemplate):
     def __init__(self,master):
-        LessonInfoTemplate.__init__(self,master)
+        LessonTemplate.__init__(self,master)
         self.title.config(text="Differentiation;Min/Max")
         self.imagefile.config(file="5.png")
         self.explanation.config(text="This lesson will explain to you what a minimum is, what a maximum is and how to use differentiation to find them.")
 
-class LessonInfo6(LessonInfoTemplate):
+class LessonInfo6(LessonTemplate):
     def __init__(self,master):
-        LessonInfoTemplate.__init__(self,master)
+        LessonTemplate.__init__(self,master)
         self.title.config(text="Integration;Basics")
         self.imagefile.config(file="6.png")
         self.explanation.config(text="This lesson will show you the basics behind integration, what integration actually does and how to integrate a quadratic.")
 
-class LessonInfo7(LessonInfoTemplate):
+class LessonInfo7(LessonTemplate):
     def __init__(self,master):
-        LessonInfoTemplate.__init__(self,master)
+        LessonTemplate.__init__(self,master)
         self.title.config(text="Integration;Functions")
         self.imagefile.config(file="7.png")
         self.explanation.config(text="This lesson will walk you through finding the original equation by using integration methods.")
 
-class LessonInfo8(LessonInfoTemplate):
+class LessonInfo8(LessonTemplate):
     def __init__(self,master):
-        LessonInfoTemplate.__init__(self,master)
+        LessonTemplate.__init__(self,master)
         self.title.config(text="Integration;Kinematics")
         self.imagefile.config(file="8.png")
         self.explanation.config(text="This lesson will explain to you what kinematics are and how apply integration/differentiation techniques to them.")
 
-class LessonInfo9(LessonInfoTemplate):
+class LessonInfo9(LessonTemplate):
     def __init__(self,master):
-        LessonInfoTemplate.__init__(self,master)
+        LessonTemplate.__init__(self,master)
         self.title.config(text="Final Quiz")
         self.imagefile.config(file="shrek.gif",format="gif -index 1600")
         self.explanation.config(text="This is the final quiz! You should be comfortable with all of the topics and concepts covered in this program before you attempt this.")
         self.nextbutton.config(text="Start the quiz!")
+
+class Lesson1P1(LessonTemplate):
+    def __init__(self,master):
+        LessonTemplate.__init__(self,master)
+        self.title.config(text="Differentiation;Basics")
+        self.imagefile.config(file="lesson.png")
+        self.pagenumber.config(text="2/6")
+        self.explanation.config(text="When differentiating a quadratic, you look at each piece of the quadratic and 'take it down a level', so to speak. Refer to the above image, where x\u00B2 becomes 2x, 4x becomes 4 and 9 becomes 0.")
+        self.nextbutton.config(command=lambda:master.switch_frame(Lesson1P2))
+        self.backbutton.config(command=lambda:master.switch_frame(LessonInfo1))
+
+class Lesson1P2(LessonTemplate):
+    def __init__(self,master):
+        LessonTemplate.__init__(self,master)
+        self.title.config(text="Differentiation;Basics")
+        self.imagefile.config(file="lesson2.png")
+        self.pagenumber.config(text="3/6")
+        self.explanation.config(text="If x is to a power, the power 'drops down' (x is multiplied by the power) and one is subtracted from the power. If it is just x, then you remove the x and just leave its coefficient. If it is just a constant, then it becomes 0.")
+        self.nextbutton.config(command=lambda:master.switch_frame(Lesson1P3))
+        self.backbutton.config(command=lambda:master.switch_frame(Lesson1P1))
+
+class Lesson1P3(LessonTemplate):
+    def __init__(self,master):
+        LessonTemplate.__init__(self,master)
+        self.title.config(text="Differentiation;Basics")
+        self.imagefile.config(file="lesson3.png")
+        self.pagenumber.config(text="4/6")
+        self.explanation.config(text="By following these rules, you can see how we derive x\u00B2 + 4x + 9 to become 2x+4.")
+        self.nextbutton.config(command=lambda:master.switch_frame(Lesson1P4))
+        self.backbutton.config(command=lambda:master.switch_frame(Lesson1P2))
+
+class Lesson1P4(LessonTemplate):
+    def __init__(self,master):
+        LessonTemplate.__init__(self,master)
+        self.title.config(text="Differentiation;Basics")
+        self.imagefile.config(file="lesson4.png")
+        self.pagenumber.config(text="5/6")
+        self.explanation.config(text="Differentiating an equation finds its gradient, or its Rate of Change. Gradients will be explained later, but you need to know that to find the rate of change of an equation you have to differentiate it.")
+        self.nextbutton.config(command=lambda:master.switch_frame(Lesson1P5))
+        self.backbutton.config(command=lambda:master.switch_frame(Lesson1P3))
+
+class Lesson1P5(LessonTemplate):
+    def __init__(self,master):
+        LessonTemplate.__init__(self,master)
+        self.title.config(text="Differentiation;Basics")
+        self.imagefile.config(file="parrot.png")
+        self.pagenumber.config(text="6/6")
+        self.explanation.config(text="Congratulations, you finished this lesson! You should now know how to differentiate a quadratic equation. Go back through the lesson if you're unsure on anything, otherwise take the quiz!")
+        self.nextbutton.config(text="Take the Quiz!",command="")
+        self.backbutton.config(text="Back to Start",command=lambda:master.switch_frame(LessonInfo1))
 
 #Defining the main subroutine
 def main():
