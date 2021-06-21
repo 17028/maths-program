@@ -172,7 +172,7 @@ class Lesson1P1(LessonTemplate):
     def __init__(self,master):
         LessonTemplate.__init__(self,master)
         self.title.config(text="Differentiation;Basics")
-        self.imagefile.config(file=get_image("lesson.png"))
+        self.imagefile.config(file=get_image("lesson1 1.png"))
         self.pagenumber.config(text="2/6")
         self.explanation.config(text="When differentiating a quadratic, you look at each piece of the quadratic and 'take it down a level', so to speak. Refer to the above image, where x\u00B2 becomes 2x, 4x becomes 4 and 9 becomes 0.")
         self.nextbutton.config(command=lambda:master.switch_frame(Lesson1P2))
@@ -182,7 +182,7 @@ class Lesson1P2(LessonTemplate):
     def __init__(self,master):
         LessonTemplate.__init__(self,master)
         self.title.config(text="Differentiation;Basics")
-        self.imagefile.config(file=get_image("lesson2.png"))
+        self.imagefile.config(file=get_image("lesson1 2.png"))
         self.pagenumber.config(text="3/6")
         self.explanation.config(text="If x is to a power, the power 'drops down' (x is multiplied by the power) and one is subtracted from the power. If it is just x, then you remove the x and just leave its coefficient. If it is just a constant, then it becomes 0.")
         self.nextbutton.config(command=lambda:master.switch_frame(Lesson1P3))
@@ -192,7 +192,7 @@ class Lesson1P3(LessonTemplate):
     def __init__(self,master):
         LessonTemplate.__init__(self,master)
         self.title.config(text="Differentiation;Basics")
-        self.imagefile.config(file=get_image("lesson3.png"))
+        self.imagefile.config(file=get_image("lesson1 3.png"))
         self.pagenumber.config(text="4/6")
         self.explanation.config(text="By following these rules, you can see how we derive x\u00B2 + 4x + 9 to become 2x+4.")
         self.nextbutton.config(command=lambda:master.switch_frame(Lesson1P4))
@@ -202,7 +202,7 @@ class Lesson1P4(LessonTemplate):
     def __init__(self,master):
         LessonTemplate.__init__(self,master)
         self.title.config(text="Differentiation;Basics")
-        self.imagefile.config(file=get_image("lesson4.png"))
+        self.imagefile.config(file=get_image("lesson1 4.png"))
         self.pagenumber.config(text="5/6")
         self.explanation.config(text="Differentiating an equation finds its gradient, or its Rate of Change. Gradients will be explained later, but you need to know that to find the rate of change of an equation you have to differentiate it.")
         self.nextbutton.config(command=lambda:master.switch_frame(Lesson1P5))
