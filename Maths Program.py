@@ -125,7 +125,10 @@ class LessonInfo3(LessonTemplate):
         LessonTemplate.__init__(self,master)
         self.title.config(text="Differentiation;Tangents")
         self.imagefile.config(file=get_image("3.png"))
+        self.pagenumber.config(text="1/7")
         self.explanation.config(text="This lesson will explain to you what a tangent is, what a normal is, and how to use the gradient to find the equation of a tangent.")
+        self.nextbutton.config(command=lambda:master.switch_frame(Lesson3P1))
+        self.backbutton.config(command=lambda:master.switch_frame(LessonSelect))
 
 class LessonInfo4(LessonTemplate):
     def __init__(self,master):
@@ -264,67 +267,61 @@ class Lesson3P1(LessonTemplate):
     def __init__(self,master):
         LessonTemplate.__init__(self,master)
         self.title.config(text="Differentiation;Tangents")
-        self.imagefile.config(#file=get_image("")
-        )
-        self.pagenumber.config(text="2/")
+        self.imagefile.config(file=get_image("lesson3 1.png"))
+        self.pagenumber.config(text="2/7")
         self.explanation.config(text="A tangent line to a given quadratic equation is a line that has the same gradient as the point of the curve it touches.")
-        self.nextbutton.config(text="",command=lambda:master.switch_frame(LessonSelect))
-        self.backbutton.config(text="",command=lambda:master.switch_frame(LessonSelect))
+        self.nextbutton.config(command=lambda:master.switch_frame(Lesson3P2))
+        self.backbutton.config(command=lambda:master.switch_frame(LessonInfo3))
 
 class Lesson3P2(LessonTemplate):
     def __init__(self,master):
         LessonTemplate.__init__(self,master)
         self.title.config(text="Differentiation;Tangents")
-        self.imagefile.config(#file=get_image("")
-        )
-        self.pagenumber.config(text="3/")
+        self.imagefile.config(file=get_image("lesson3 2.png"))
+        self.pagenumber.config(text="3/7")
         self.explanation.config(text="A normal line is a line that is perpendicular to the tangent line (i.e it is rotated 90 degrees).")
-        self.nextbutton.config(text="",command=lambda:master.switch_frame(LessonSelect))
-        self.backbutton.config(text="",command=lambda:master.switch_frame(LessonSelect))
+        self.nextbutton.config(command=lambda:master.switch_frame(Lesson3P3))
+        self.backbutton.config(command=lambda:master.switch_frame(Lesson3P1))
 
 class Lesson3P3(LessonTemplate):
     def __init__(self,master):
         LessonTemplate.__init__(self,master)
         self.title.config(text="Differentiation;Tangents")
-        self.imagefile.config(#file=get_image("")
-        )
-        self.pagenumber.config(text="4/")
+        self.imagefile.config(file=get_image("lesson3 3.png"))
+        self.pagenumber.config(text="4/7")
         self.explanation.config(text="To find the equation of a tangent to a curve at a specific x value, you first find the gradient of the curve at that x value. We call the gradient value m and the x value a.")
-        self.nextbutton.config(text="",command=lambda:master.switch_frame(LessonSelect))
-        self.backbutton.config(text="",command=lambda:master.switch_frame(LessonSelect))
+        self.nextbutton.config(command=lambda:master.switch_frame(Lesson3P4))
+        self.backbutton.config(command=lambda:master.switch_frame(Lesson3P2))
 
 class Lesson3P4(LessonTemplate):
     def __init__(self,master):
         LessonTemplate.__init__(self,master)
         self.title.config(text="Differentiation;Tangents")
-        self.imagefile.config(#file=get_image("")
-        )
-        self.pagenumber.config(text="5/")
+        self.imagefile.config(file=get_image("lesson3 4.png"))
+        self.pagenumber.config(text="5/7")
         self.explanation.config(text="Then, substitute the x value back into the original equation to find its corresponding y value. We call this value b.")
-        self.nextbutton.config(text="",command=lambda:master.switch_frame(LessonSelect))
-        self.backbutton.config(text="",command=lambda:master.switch_frame(LessonSelect))
+        self.nextbutton.config(command=lambda:master.switch_frame(Lesson3P5))
+        self.backbutton.config(command=lambda:master.switch_frame(Lesson3P3))
 
 class Lesson3P5(LessonTemplate):
     def __init__(self,master):
         LessonTemplate.__init__(self,master)
         self.title.config(text="Differentiation;Tangents")
-        self.imagefile.config(#file=get_image("")
-        )
-        self.pagenumber.config(text="6/")
+        self.imagefile.config(file=get_image("lesson3 5.png"))
+        self.pagenumber.config(text="6/7")
         self.explanation.config(text="Finally, substitute a,b and m into the equation y - b = m(x - a), and rearrange to find the equation of the tangent.")
-        self.nextbutton.config(text="",command=lambda:master.switch_frame(LessonSelect))
-        self.backbutton.config(text="",command=lambda:master.switch_frame(LessonSelect))
+        self.nextbutton.config(command=lambda:master.switch_frame(Lesson3P6))
+        self.backbutton.config(command=lambda:master.switch_frame(Lesson3P4))
 
 class Lesson3P6(LessonTemplate):
     def __init__(self,master):
         LessonTemplate.__init__(self,master)
         self.title.config(text="Differentiation;Tangents")
-        self.imagefile.config(#file=get_image("")
-        )
-        self.pagenumber.config(text="7/")
+        self.imagefile.config(file=get_image("lesson3 6.png"))
+        self.pagenumber.config(text="7/7")
         self.explanation.config(text="To find the normal line of a tangent, go through the same procedure as finding a tangent, except use the equation y - b = -1/m(x - a ).")
-        self.nextbutton.config(text="",command=lambda:master.switch_frame(LessonSelect))
-        self.backbutton.config(text="",command=lambda:master.switch_frame(LessonSelect))
+        self.nextbutton.config(text="To the Quiz!",command=lambda:master.switch_frame())
+        self.backbutton.config(text="Back to Menu",command=lambda:master.switch_frame(LessonSelect))
 
 #Defining the main subroutine
 def main():
