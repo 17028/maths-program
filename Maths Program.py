@@ -125,7 +125,7 @@ class LessonInfo3(LessonTemplate):
         LessonTemplate.__init__(self,master)
         self.title.config(text="Differentiation;Tangents")
         self.imagefile.config(file=get_image("3.png"))
-        self.pagenumber.config(text="1/7")
+        self.pagenumber.config(text="1/8")
         self.explanation.config(text="This lesson will explain to you what a tangent is, what a normal is, and how to use the gradient to find the equation of a tangent.")
         self.nextbutton.config(command=lambda:master.switch_frame(Lesson3P1))
         self.backbutton.config(command=lambda:master.switch_frame(LessonSelect))
@@ -133,37 +133,52 @@ class LessonInfo3(LessonTemplate):
 class LessonInfo4(LessonTemplate):
     def __init__(self,master):
         LessonTemplate.__init__(self,master)
-        self.title.config(text="Differentiation;Δ Graident")
+        self.title.config(text="Differentiation;Increase/Decrease")
         self.imagefile.config(file=get_image("4.png"))
-        self.explanation.config(text="This lesson will show you how to find increasing and decreasing functions using the changes (Δ) in gradient.")
+        self.pagenumber.config(text="1/5")
+        self.explanation.config(text="This lesson will show you how determine whether a function is increasing or decreasing via differentiation methods.")
+        self.nextbutton.config(command=lambda:master.switch_frame(Lesson4P1))
+        self.backbutton.config(command=lambda:master.switch_frame(LessonSelect))
 
 class LessonInfo5(LessonTemplate):
     def __init__(self,master):
         LessonTemplate.__init__(self,master)
         self.title.config(text="Differentiation;Min/Max")
         self.imagefile.config(file=get_image("5.png"))
+        self.pagenumber.config(text="1/5")
         self.explanation.config(text="This lesson will explain to you what a minimum is, what a maximum is and how to use differentiation to find them.")
+        self.nextbutton.config(command=lambda:master.switch_frame(Lesson5P1))
+        self.backbutton.config(command=lambda:master.switch_frame(LessonSelect))
 
 class LessonInfo6(LessonTemplate):
     def __init__(self,master):
         LessonTemplate.__init__(self,master)
         self.title.config(text="Integration;Basics")
         self.imagefile.config(file=get_image("6.png"))
+        self.pagenumber.config(text="1/8")
         self.explanation.config(text="This lesson will show you the basics behind integration, what integration actually does and how to integrate a quadratic.")
+        self.nextbutton.config(command=lambda:master.switch_frame(Lesson4P1))
+        self.backbutton.config(command=lambda:master.switch_frame(LessonSelect))
 
 class LessonInfo7(LessonTemplate):
     def __init__(self,master):
         LessonTemplate.__init__(self,master)
         self.title.config(text="Integration;Functions")
         self.imagefile.config(file=get_image("7.png"))
+        self.pagenumber.config(text="1/8")
         self.explanation.config(text="This lesson will walk you through finding the original equation by using integration methods.")
+        self.nextbutton.config(command=lambda:master.switch_frame(Lesson4P1))
+        self.backbutton.config(command=lambda:master.switch_frame(LessonSelect))
 
 class LessonInfo8(LessonTemplate):
     def __init__(self,master):
         LessonTemplate.__init__(self,master)
         self.title.config(text="Integration;Kinematics")
         self.imagefile.config(file=get_image("8.png"))
+        self.pagenumber.config(text="1/8")
         self.explanation.config(text="This lesson will explain to you what kinematics are and how apply integration/differentiation techniques to them.")
+        self.nextbutton.config(command=lambda:master.switch_frame(Lesson4P1))
+        self.backbutton.config(command=lambda:master.switch_frame(LessonSelect))
 
 class LessonInfo9(LessonTemplate):
     def __init__(self,master):
@@ -172,6 +187,11 @@ class LessonInfo9(LessonTemplate):
         self.imagefile.config(file=get_image("shrek.gif"),format="gif -index 1600")
         self.explanation.config(text="This is the final quiz! You should be comfortable with all of the topics and concepts covered in this program before you attempt this.")
         self.nextbutton.config(text="Start the quiz!")
+        self.backbutton.config(command=lambda:master.switch_frame(LessonSelect))
+
+
+#############################################################
+#Lessons start
 
 class Lesson1P1(LessonTemplate):
     def __init__(self,master):
@@ -209,7 +229,7 @@ class Lesson1P4(LessonTemplate):
         self.title.config(text="Differentiation;Basics")
         self.imagefile.config(file=get_image("lesson1 4.png"))
         self.pagenumber.config(text="5/6")
-        self.explanation.config(text="Differentiating an equation finds its gradient, or its Rate of Change. Gradients will be explained later, but you need to know that to find the rate of change of an equation you have to differentiate it.")
+        self.explanation.config(text="Differentiating an equation finds its gradient, or its Rate of Change. Gradients will be explained later, but you need to know that to find the rate of change of an equation you have to differentiate it. Also, take note of the notation f'(x), which means the derivative of x.")
         self.nextbutton.config(command=lambda:master.switch_frame(Lesson1P5))
         self.backbutton.config(command=lambda:master.switch_frame(Lesson1P3))
 
@@ -268,7 +288,7 @@ class Lesson3P1(LessonTemplate):
         LessonTemplate.__init__(self,master)
         self.title.config(text="Differentiation;Tangents")
         self.imagefile.config(file=get_image("lesson3 1.png"))
-        self.pagenumber.config(text="2/7")
+        self.pagenumber.config(text="2/8")
         self.explanation.config(text="A tangent line to a given quadratic equation is a line that has the same gradient as the point of the curve it touches.")
         self.nextbutton.config(command=lambda:master.switch_frame(Lesson3P2))
         self.backbutton.config(command=lambda:master.switch_frame(LessonInfo3))
@@ -278,7 +298,7 @@ class Lesson3P2(LessonTemplate):
         LessonTemplate.__init__(self,master)
         self.title.config(text="Differentiation;Tangents")
         self.imagefile.config(file=get_image("lesson3 2.png"))
-        self.pagenumber.config(text="3/7")
+        self.pagenumber.config(text="3/8")
         self.explanation.config(text="A normal line is a line that is perpendicular to the tangent line (i.e it is rotated 90 degrees).")
         self.nextbutton.config(command=lambda:master.switch_frame(Lesson3P3))
         self.backbutton.config(command=lambda:master.switch_frame(Lesson3P1))
@@ -288,7 +308,7 @@ class Lesson3P3(LessonTemplate):
         LessonTemplate.__init__(self,master)
         self.title.config(text="Differentiation;Tangents")
         self.imagefile.config(file=get_image("lesson3 3.png"))
-        self.pagenumber.config(text="4/7")
+        self.pagenumber.config(text="4/8")
         self.explanation.config(text="To find the equation of a tangent to a curve at a specific x value, you first find the gradient of the curve at that x value. We call the gradient value m and the x value a.")
         self.nextbutton.config(command=lambda:master.switch_frame(Lesson3P4))
         self.backbutton.config(command=lambda:master.switch_frame(Lesson3P2))
@@ -298,7 +318,7 @@ class Lesson3P4(LessonTemplate):
         LessonTemplate.__init__(self,master)
         self.title.config(text="Differentiation;Tangents")
         self.imagefile.config(file=get_image("lesson3 4.png"))
-        self.pagenumber.config(text="5/7")
+        self.pagenumber.config(text="5/8")
         self.explanation.config(text="Then, substitute the x value back into the original equation to find its corresponding y value. We call this value b.")
         self.nextbutton.config(command=lambda:master.switch_frame(Lesson3P5))
         self.backbutton.config(command=lambda:master.switch_frame(Lesson3P3))
@@ -308,7 +328,7 @@ class Lesson3P5(LessonTemplate):
         LessonTemplate.__init__(self,master)
         self.title.config(text="Differentiation;Tangents")
         self.imagefile.config(file=get_image("lesson3 5.png"))
-        self.pagenumber.config(text="6/7")
+        self.pagenumber.config(text="6/8")
         self.explanation.config(text="Finally, substitute a,b and m into the equation y - b = m(x - a), and rearrange to find the equation of the tangent.")
         self.nextbutton.config(command=lambda:master.switch_frame(Lesson3P6))
         self.backbutton.config(command=lambda:master.switch_frame(Lesson3P4))
@@ -318,10 +338,101 @@ class Lesson3P6(LessonTemplate):
         LessonTemplate.__init__(self,master)
         self.title.config(text="Differentiation;Tangents")
         self.imagefile.config(file=get_image("lesson3 6.png"))
-        self.pagenumber.config(text="7/7")
+        self.pagenumber.config(text="7/8")
         self.explanation.config(text="To find the normal line of a tangent, go through the same procedure as finding a tangent, except use the equation y - b = -1/m(x - a ).")
+        self.nextbutton.config(command=lambda:master.switch_frame(Lesson3P7))
+        self.backbutton.config(command=lambda:master.switch_frame(Lesson3P5))
+
+class Lesson3P7(LessonTemplate):
+    def __init__(self,master):
+        LessonTemplate.__init__(self,master)
+        self.title.config(text="Differentiation;Basics")
+        self.imagefile.config(file=get_image("parrot.png"))
+        self.pagenumber.config(text="8/8")
+        self.explanation.config(text="Congratulations, you finished this lesson! You should now know how to find the tangent and normal lines of an equation. Go back through the lesson if you're unsure on anything, otherwise take the quiz!")
         self.nextbutton.config(text="To the Quiz!",command=lambda:master.switch_frame())
         self.backbutton.config(text="Back to Menu",command=lambda:master.switch_frame(LessonSelect))
+
+class Lesson4P1(LessonTemplate):
+    def __init__(self,master):
+        LessonTemplate.__init__(self,master)
+        self.title.config(text="Differentiation;Increase/Decrease")
+        self.imagefile.config(file=get_image("lesson4 1.png"))
+        self.pagenumber.config(text="2/5")
+        self.explanation.config(text="When a function is increasing, its gradient is positive (going up as it moves right), and when it is decreasing, its gradient is negative (going down as it moves right). When it is still (straight), it is stationary.")
+        self.nextbutton.config(command=lambda:master.switch_frame(Lesson4P2))
+        self.backbutton.config(command=lambda:master.switch_frame(LessonInfo4))
+
+class Lesson4P2(LessonTemplate):
+    def __init__(self,master):
+        LessonTemplate.__init__(self,master)
+        self.title.config(text="Differentiation;Increase/Decrease")
+        self.imagefile.config(file=get_image("lesson4 2.png"))
+        self.pagenumber.config(text="3/5")
+        self.explanation.config(text="To determine whether a function is increasing or decreasing at a certain point, derive it and substitute in the x value of that point. Note that f'(x) means the derivative of x. If the result is positive, it is increasing. If it is negative, it is decreasing. If it is 0, it is stationary.")
+        self.nextbutton.config(command=lambda:master.switch_frame(Lesson4P3))
+        self.backbutton.config(command=lambda:master.switch_frame(Lesson4P1))
+
+class Lesson4P3(LessonTemplate):
+    def __init__(self,master):
+        LessonTemplate.__init__(self,master)
+        self.title.config(text="Differentiation;Increase/Decrease")
+        self.imagefile.config(file=get_image("lesson4 3.png"))
+        self.pagenumber.config(text="4/5")
+        self.explanation.config(text="Take a look at the worked example.")
+        self.nextbutton.config(command=lambda:master.switch_frame(Lesson4P4))
+        self.backbutton.config(command=lambda:master.switch_frame(Lesson4P2))
+
+class Lesson4P4(LessonTemplate):
+    def __init__(self,master):
+        LessonTemplate.__init__(self,master)
+        self.title.config(text="Differentiation;Basics")
+        self.imagefile.config(file=get_image("parrot.png"))
+        self.pagenumber.config(text="5/5")
+        self.explanation.config(text="Congratulations, you finished this lesson! You should now know how to determine whether an equation is increasing, decreasing or stationary. Go back through the lesson if you're unsure on anything, otherwise take the quiz!")
+        self.nextbutton.config(text="To the Quiz!",command=lambda:master.switch_frame())
+        self.backbutton.config(text="Back to Menu",command=lambda:master.switch_frame(LessonSelect))
+
+class Lesson5P1(LessonTemplate):
+    def __init__(self,master):
+        LessonTemplate.__init__(self,master)
+        self.title.config(text="Differentiation;Min/Max")
+        self.imagefile.config(file=get_image("lesson5 1.png"))
+        self.pagenumber.config(text="2/5")
+        self.explanation.config(text="A turning point is a point where f'(x) = 0. A maximum is a 'peak' and a minimum is a 'valley'.")
+        self.nextbutton.config(command=lambda:master.switch_frame(Lesson5P2))
+        self.backbutton.config(command=lambda:master.switch_frame(LessonInfo5))
+
+class Lesson5P2(LessonTemplate):
+    def __init__(self,master):
+        LessonTemplate.__init__(self,master)
+        self.title.config(text="Differentiation;Min/Max")
+        self.imagefile.config(file=get_image("lesson5 2.png"))
+        self.pagenumber.config(text="3/5")
+        self.explanation.config(text="To determine whether a quadratic's turning point is a minimum or a maximum, derive its equation twice.")
+        self.nextbutton.config(command=lambda:master.switch_frame(Lesson5P3))
+        self.backbutton.config(command=lambda:master.switch_frame(Lesson5P1))
+
+class Lesson5P3(LessonTemplate):
+    def __init__(self,master):
+        LessonTemplate.__init__(self,master)
+        self.title.config(text="Differentiation;Min/Max")
+        self.imagefile.config(file=get_image("lesson5 3.png"))
+        self.pagenumber.config(text="4/5")
+        self.explanation.config(text="Take a look at the worked example.")
+        self.nextbutton.config(command=lambda:master.switch_frame(Lesson5P4))
+        self.backbutton.config(command=lambda:master.switch_frame(Lesson5P2))
+
+class Lesson5P4(LessonTemplate):
+    def __init__(self,master):
+        LessonTemplate.__init__(self,master)
+        self.title.config(text="Differentiation;Min/Max")
+        self.imagefile.config(file=get_image("parrot.png"))
+        self.pagenumber.config(text="5/5")
+        self.explanation.config(text="Congratulations, you finished this lesson! You should now know how to determine whether an equation's turning point is a minimum or a maximum. Go back through the lesson if you're unsure on anything, otherwise take the quiz!")
+        self.nextbutton.config(text="To the Quiz!",command=lambda:master.switch_frame())
+        self.backbutton.config(text="Back to Menu",command=lambda:master.switch_frame(LessonSelect))
+
 
 #Defining the main subroutine
 def main():
