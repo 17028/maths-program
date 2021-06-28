@@ -155,9 +155,9 @@ class LessonInfo6(LessonTemplate):
         LessonTemplate.__init__(self,master)
         self.title.config(text="Integration;Basics")
         self.imagefile.config(file=get_image("6.png"))
-        self.pagenumber.config(text="1/8")
+        self.pagenumber.config(text="1/5")
         self.explanation.config(text="This lesson will show you the basics behind integration, what integration actually does and how to integrate a quadratic.")
-        self.nextbutton.config(command=lambda:master.switch_frame(Lesson4P1))
+        self.nextbutton.config(command=lambda:master.switch_frame(Lesson6P1))
         self.backbutton.config(command=lambda:master.switch_frame(LessonSelect))
 
 class LessonInfo7(LessonTemplate):
@@ -165,9 +165,9 @@ class LessonInfo7(LessonTemplate):
         LessonTemplate.__init__(self,master)
         self.title.config(text="Integration;Functions")
         self.imagefile.config(file=get_image("7.png"))
-        self.pagenumber.config(text="1/8")
+        self.pagenumber.config(text="1/4")
         self.explanation.config(text="This lesson will walk you through finding the original equation by using integration methods.")
-        self.nextbutton.config(command=lambda:master.switch_frame(Lesson4P1))
+        self.nextbutton.config(command=lambda:master.switch_frame(Lesson7P1))
         self.backbutton.config(command=lambda:master.switch_frame(LessonSelect))
 
 class LessonInfo8(LessonTemplate):
@@ -430,6 +430,76 @@ class Lesson5P4(LessonTemplate):
         self.imagefile.config(file=get_image("parrot.png"))
         self.pagenumber.config(text="5/5")
         self.explanation.config(text="Congratulations, you finished this lesson! You should now know how to determine whether an equation's turning point is a minimum or a maximum. Go back through the lesson if you're unsure on anything, otherwise take the quiz!")
+        self.nextbutton.config(text="To the Quiz!",command=lambda:master.switch_frame())
+        self.backbutton.config(text="Back to Menu",command=lambda:master.switch_frame(LessonSelect))
+
+class Lesson6P1(LessonTemplate):
+    def __init__(self,master):
+        LessonTemplate.__init__(self,master)
+        self.title.config(text="Integration;Basics")
+        self.imagefile.config(file=get_image("lesson6 1.png"))
+        self.pagenumber.config(text="2/5")
+        self.explanation.config(text="You can think of integration as the opposite of differenatiation. If you have the graident of an equation, you can integrate it to find the original equation. Integration is sometimes called anti differentiation.")
+        self.nextbutton.config(command=lambda:master.switch_frame(Lesson6P2))
+        self.backbutton.config(command=lambda:master.switch_frame(LessonInfo6))
+
+class Lesson6P2(LessonTemplate):
+    def __init__(self,master):
+        LessonTemplate.__init__(self,master)
+        self.title.config(text="Integration;Basics")
+        self.imagefile.config(file=get_image("lesson6 2.png"))
+        self.pagenumber.config(text="3/5")
+        self.explanation.config(text="To integrate an equation, take everything 'up a level'. For anything multiplied by x, put x to the power of its coefficient and subtract one from its coefficient. For a constant, multiply it by x. Always add a '+c' to represent constants that were removed in the original equation. ")
+        self.nextbutton.config(command=lambda:master.switch_frame(Lesson6P3))
+        self.backbutton.config(command=lambda:master.switch_frame(Lesson6P1))
+
+class Lesson6P3(LessonTemplate):
+    def __init__(self,master):
+        LessonTemplate.__init__(self,master)
+        self.title.config(text="Integration;Basics")
+        self.imagefile.config(file=get_image("lesson6 3.png"))
+        self.pagenumber.config(text="4/5")
+        self.explanation.config(text="You might notice that we are left with a '+c' instead of the constant in the original equation. We will cover how to find this constant and therefore fully find the original equation in the next lesson.")
+        self.nextbutton.config(command=lambda:master.switch_frame(Lesson6P4))
+        self.backbutton.config(command=lambda:master.switch_frame(Lesson6P2))
+
+class Lesson6P4(LessonTemplate):
+    def __init__(self,master):
+        LessonTemplate.__init__(self,master)
+        self.title.config(text="Differentiation;Min/Max")
+        self.imagefile.config(file=get_image("parrot.png"))
+        self.pagenumber.config(text="5/5")
+        self.explanation.config(text="Congratulations, you finished this lesson! You should now know how to integrate an equation. Go back through the lesson if you're unsure on anything, otherwise take the quiz!")
+        self.nextbutton.config(text="To the Quiz!",command=lambda:master.switch_frame())
+        self.backbutton.config(text="Back to Menu",command=lambda:master.switch_frame(LessonSelect))
+
+class Lesson7P1(LessonTemplate):
+    def __init__(self,master):
+        LessonTemplate.__init__(self,master)
+        self.title.config(text="Integration;Functions")
+        self.imagefile.config(file=get_image("lesson7 1.png"))
+        self.pagenumber.config(text="2/4")
+        self.explanation.config(text="To find the original equation of a gradient, a point will be provided to you. Integrate the equation to get to the state where you have the unknown of '+c' (previous lesson). Then substitute in your point and solve for x.")
+        self.nextbutton.config(command=lambda:master.switch_frame(Lesson7P2))
+        self.backbutton.config(command=lambda:master.switch_frame(LessonInfo6))
+
+class Lesson7P2(LessonTemplate):
+    def __init__(self,master):
+        LessonTemplate.__init__(self,master)
+        self.title.config(text="Integration;Functions")
+        self.imagefile.config(file=get_image("lesson7 2.png"))
+        self.pagenumber.config(text="3/4")
+        self.explanation.config(text="Take a look at the worked example.")
+        self.nextbutton.config(command=lambda:master.switch_frame(Lesson7P3))
+        self.backbutton.config(command=lambda:master.switch_frame(Lesson7P1))
+
+class Lesson7P3(LessonTemplate):
+    def __init__(self,master):
+        LessonTemplate.__init__(self,master)
+        self.title.config(text="Integration;Functions")
+        self.imagefile.config(file=get_image("parrot.png"))
+        self.pagenumber.config(text="4/4")
+        self.explanation.config(text="Congratulations, you finished this lesson! You should now know how to integrate to find the original equation. Go back through the lesson if you're unsure on anything, otherwise take the quiz!")
         self.nextbutton.config(text="To the Quiz!",command=lambda:master.switch_frame())
         self.backbutton.config(text="Back to Menu",command=lambda:master.switch_frame(LessonSelect))
 
