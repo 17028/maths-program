@@ -175,9 +175,9 @@ class LessonInfo8(LessonTemplate):
         LessonTemplate.__init__(self,master)
         self.title.config(text="Integration;Kinematics")
         self.imagefile.config(file=get_image("8.png"))
-        self.pagenumber.config(text="1/8")
+        self.pagenumber.config(text="1/5")
         self.explanation.config(text="This lesson will explain to you what kinematics are and how apply integration/differentiation techniques to them.")
-        self.nextbutton.config(command=lambda:master.switch_frame(Lesson4P1))
+        self.nextbutton.config(command=lambda:master.switch_frame(Lesson8P1))
         self.backbutton.config(command=lambda:master.switch_frame(LessonSelect))
 
 class LessonInfo9(LessonTemplate):
@@ -500,6 +500,48 @@ class Lesson7P3(LessonTemplate):
         self.imagefile.config(file=get_image("parrot.png"))
         self.pagenumber.config(text="4/4")
         self.explanation.config(text="Congratulations, you finished this lesson! You should now know how to integrate to find the original equation. Go back through the lesson if you're unsure on anything, otherwise take the quiz!")
+        self.nextbutton.config(text="To the Quiz!",command=lambda:master.switch_frame())
+        self.backbutton.config(text="Back to Menu",command=lambda:master.switch_frame(LessonSelect))
+
+class Lesson8P1(LessonTemplate):
+    def __init__(self,master):
+        LessonTemplate.__init__(self,master)
+        self.title.config(text="Integration;Kinematics")
+        self.imagefile.config(file=get_image("lesson8 1.png"))
+        self.pagenumber.config(text="2/5")
+        self.explanation.config(text="Kinematics describes the relationships between displacement, velocity and acceleration."
+             + " Because velocity is the rate of change of displacement, and acceleration is the rate of change of velocity, you can differentiate displacement to find velocity, and differentiate velocity to acceleration."
+             + " You can also go backwards by integrating; take a look at the image above.")
+        self.nextbutton.config(command=lambda:master.switch_frame(Lesson8P2))
+        self.backbutton.config(command=lambda:master.switch_frame(LessonInfo8))
+
+class Lesson8P2(LessonTemplate):
+    def __init__(self,master):
+        LessonTemplate.__init__(self,master)
+        self.title.config(text="Integration;Kinematics")
+        self.imagefile.config(file=get_image("lesson8 2.png"))
+        self.pagenumber.config(text="3/5")
+        self.explanation.config(text="Take a look at the worked example above where you are calculating acceleration from displacement.")
+        self.nextbutton.config(command=lambda:master.switch_frame(Lesson8P3))
+        self.backbutton.config(command=lambda:master.switch_frame(Lesson8P1))
+
+class Lesson8P3(LessonTemplate):
+    def __init__(self,master):
+        LessonTemplate.__init__(self,master)
+        self.title.config(text="Integration;Kinematics")
+        self.imagefile.config(file=get_image("lesson8 3.png"))
+        self.pagenumber.config(text="4/5")
+        self.explanation.config(text="Take a look at the worked example above where you are calculating displacement from acceleration. Note that points will be provided to you so that you can calculate the constant c.")
+        self.nextbutton.config(command=lambda:master.switch_frame(Lesson8P4))
+        self.backbutton.config(command=lambda:master.switch_frame(Lesson8P2))
+
+class Lesson8P4(LessonTemplate):
+    def __init__(self,master):
+        LessonTemplate.__init__(self,master)
+        self.title.config(text="Integration;Kinematics")
+        self.imagefile.config(file=get_image("parrot.png"))
+        self.pagenumber.config(text="5/5")
+        self.explanation.config(text="Congratulations, you finished this lesson! You should now know the basics of kinematics. Go back through the lesson if you're unsure on anything, otherwise take the quiz!")
         self.nextbutton.config(text="To the Quiz!",command=lambda:master.switch_frame())
         self.backbutton.config(text="Back to Menu",command=lambda:master.switch_frame(LessonSelect))
 
