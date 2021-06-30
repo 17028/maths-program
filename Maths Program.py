@@ -350,7 +350,7 @@ class Lesson3P7(LessonTemplate):
         self.imagefile.config(file=get_image("congratulations.png"))
         self.pagenumber.config(text="8/8")
         self.explanation.config(text="Congratulations, you finished this lesson! You should now know how to find the tangent and normal lines of an equation. Go back through the lesson if you're unsure on anything, otherwise take the quiz!")
-        self.nextbutton.config(text="To the Quiz!",command=lambda:master.switch_frame())
+        self.nextbutton.config(text="Take the Quiz!",command=lambda:master.switch_frame())
         self.backbutton.config(text="Back to Menu",command=lambda:master.switch_frame(LessonSelect))
 
 class Lesson4P1(LessonTemplate):
@@ -390,7 +390,7 @@ class Lesson4P4(LessonTemplate):
         self.imagefile.config(file=get_image("congratulations.png"))
         self.pagenumber.config(text="5/5")
         self.explanation.config(text="Congratulations, you finished this lesson! You should now know how to determine whether an equation is increasing, decreasing or stationary. Go back through the lesson if you're unsure on anything, otherwise take the quiz!")
-        self.nextbutton.config(text="To the Quiz!",command=lambda:master.switch_frame())
+        self.nextbutton.config(text="Take the Quiz!",command=lambda:master.switch_frame())
         self.backbutton.config(text="Back to Menu",command=lambda:master.switch_frame(LessonSelect))
 
 class Lesson5P1(LessonTemplate):
@@ -430,7 +430,7 @@ class Lesson5P4(LessonTemplate):
         self.imagefile.config(file=get_image("congratulations.png"))
         self.pagenumber.config(text="5/5")
         self.explanation.config(text="Congratulations, you finished this lesson! You should now know how to determine whether an equation's turning point is a minimum or a maximum. Go back through the lesson if you're unsure on anything, otherwise take the quiz!")
-        self.nextbutton.config(text="To the Quiz!",command=lambda:master.switch_frame())
+        self.nextbutton.config(text="Take the Quiz!",command=lambda:master.switch_frame())
         self.backbutton.config(text="Back to Menu",command=lambda:master.switch_frame(LessonSelect))
 
 class Lesson6P1(LessonTemplate):
@@ -470,7 +470,7 @@ class Lesson6P4(LessonTemplate):
         self.imagefile.config(file=get_image("congratulations.png"))
         self.pagenumber.config(text="5/5")
         self.explanation.config(text="Congratulations, you finished this lesson! You should now know how to integrate an equation. Go back through the lesson if you're unsure on anything, otherwise take the quiz!")
-        self.nextbutton.config(text="To the Quiz!",command=lambda:master.switch_frame())
+        self.nextbutton.config(text="Take the Quiz!",command=lambda:master.switch_frame())
         self.backbutton.config(text="Back to Menu",command=lambda:master.switch_frame(LessonSelect))
 
 class Lesson7P1(LessonTemplate):
@@ -500,7 +500,7 @@ class Lesson7P3(LessonTemplate):
         self.imagefile.config(file=get_image("congratulations.png"))
         self.pagenumber.config(text="4/4")
         self.explanation.config(text="Congratulations, you finished this lesson! You should now know how to integrate to find the original equation. Go back through the lesson if you're unsure on anything, otherwise take the quiz!")
-        self.nextbutton.config(text="To the Quiz!",command=lambda:master.switch_frame())
+        self.nextbutton.config(text="Take the Quiz!",command=lambda:master.switch_frame())
         self.backbutton.config(text="Back to Menu",command=lambda:master.switch_frame(LessonSelect))
 
 class Lesson8P1(LessonTemplate):
@@ -542,7 +542,7 @@ class Lesson8P4(LessonTemplate):
         self.imagefile.config(file=get_image("congratulations.png"))
         self.pagenumber.config(text="5/5")
         self.explanation.config(text="Congratulations, you finished this lesson! You should now know the basics of kinematics. Go back through the lesson if you're unsure on anything, otherwise take the quiz!")
-        self.nextbutton.config(text="To the Quiz!",command=lambda:master.switch_frame())
+        self.nextbutton.config(text="Take the Quiz!",command=lambda:master.switch_frame())
         self.backbutton.config(text="Back to Menu",command=lambda:master.switch_frame(LessonSelect))
 
 
