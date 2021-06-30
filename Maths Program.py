@@ -69,14 +69,14 @@ class LessonSelect(tk.Frame):
         tk.Frame.__init__(self,master)
         self.config(bg=BGCOLOUR)
         tk.Label(self,text="Lessons",font=TITLEFONT,bg=BGCOLOUR) .grid(column=1,row=0)
-        tk.Button(self,text='Differentiation;Basics',width=SSBUTTONWIDTH,height=SSBUTTONHEIGHT,command=lambda:master.switch_frame(LessonInfo1),bg=DIFFBG,font = SMALLBUTTONFONT) .grid(column=0,row=1,padx=BUTTONGAPX,pady=BUTTONGAPY)
-        tk.Button(self,text='Differentiation;Gradients',width=SSBUTTONWIDTH,height=SSBUTTONHEIGHT,command=lambda:master.switch_frame(LessonInfo2),bg=DIFFBG,font = SMALLBUTTONFONT) .grid(column=1,row=1,padx=BUTTONGAPX)
-        tk.Button(self,text='Differentiation;Tangents',width=SSBUTTONWIDTH,height=SSBUTTONHEIGHT,command=lambda:master.switch_frame(LessonInfo3),bg=DIFFBG,font = SMALLBUTTONFONT) .grid(column=2,row=1,padx=BUTTONGAPX)
-        tk.Button(self,text='Differentiation;Δ Graident',width=SSBUTTONWIDTH,height=SSBUTTONHEIGHT,command=lambda:master.switch_frame(LessonInfo4),bg=DIFFBG,font = SMALLBUTTONFONT) .grid(column=0,row=2,pady=BUTTONGAPY)
-        tk.Button(self,text='Differentiation;Min/Max',width=SSBUTTONWIDTH,height=SSBUTTONHEIGHT,command=lambda:master.switch_frame(LessonInfo5),bg=DIFFBG,font = SMALLBUTTONFONT) .grid(column=1,row=2)
-        tk.Button(self,text='Integration;Basics',width=SSBUTTONWIDTH,height=SSBUTTONHEIGHT,command=lambda:master.switch_frame(LessonInfo6),bg=INTBG,font = SMALLBUTTONFONT) .grid(column=2,row=2)
-        tk.Button(self,text='Integration;Functions',width=SSBUTTONWIDTH,height=SSBUTTONHEIGHT,command=lambda:master.switch_frame(LessonInfo7),bg=INTBG,font = SMALLBUTTONFONT) .grid(column=0,row=3)
-        tk.Button(self,text='Integration;Kinematics',width=SSBUTTONWIDTH,height=SSBUTTONHEIGHT,command=lambda:master.switch_frame(LessonInfo8),bg= INTBG,font = SMALLBUTTONFONT) .grid(column=1,row=3,pady=BUTTONGAPY)
+        tk.Button(self,text='Lesson 1\n\nDifferentiation;Basics',width=SSBUTTONWIDTH,height=SSBUTTONHEIGHT,command=lambda:master.switch_frame(LessonInfo1),bg=DIFFBG,font = SMALLBUTTONFONT) .grid(column=0,row=1,padx=BUTTONGAPX,pady=BUTTONGAPY)
+        tk.Button(self,text='Lesson 2\n\nDifferentiation;Gradients',width=SSBUTTONWIDTH,height=SSBUTTONHEIGHT,command=lambda:master.switch_frame(LessonInfo2),bg=DIFFBG,font = SMALLBUTTONFONT) .grid(column=1,row=1,padx=BUTTONGAPX)
+        tk.Button(self,text='Lesson 3\n\nDifferentiation;Tangents',width=SSBUTTONWIDTH,height=SSBUTTONHEIGHT,command=lambda:master.switch_frame(LessonInfo3),bg=DIFFBG,font = SMALLBUTTONFONT) .grid(column=2,row=1,padx=BUTTONGAPX)
+        tk.Button(self,text='Lesson 4\n\nDifferentiation;Δ Graident',width=SSBUTTONWIDTH,height=SSBUTTONHEIGHT,command=lambda:master.switch_frame(LessonInfo4),bg=DIFFBG,font = SMALLBUTTONFONT) .grid(column=0,row=2,pady=BUTTONGAPY)
+        tk.Button(self,text='Lesson 5\n\nDifferentiation;Min/Max',width=SSBUTTONWIDTH,height=SSBUTTONHEIGHT,command=lambda:master.switch_frame(LessonInfo5),bg=DIFFBG,font = SMALLBUTTONFONT) .grid(column=1,row=2)
+        tk.Button(self,text='Lesson 6\n\nIntegration;Basics',width=SSBUTTONWIDTH,height=SSBUTTONHEIGHT,command=lambda:master.switch_frame(LessonInfo6),bg=INTBG,font = SMALLBUTTONFONT) .grid(column=2,row=2)
+        tk.Button(self,text='Lesson 7\n\nIntegration;Functions',width=SSBUTTONWIDTH,height=SSBUTTONHEIGHT,command=lambda:master.switch_frame(LessonInfo7),bg=INTBG,font = SMALLBUTTONFONT) .grid(column=0,row=3)
+        tk.Button(self,text='Lesson 8\n\nIntegration;Kinematics',width=SSBUTTONWIDTH,height=SSBUTTONHEIGHT,command=lambda:master.switch_frame(LessonInfo8),bg= INTBG,font = SMALLBUTTONFONT) .grid(column=1,row=3,pady=BUTTONGAPY)
         tk.Button(self,text='Final Quiz',width=SSBUTTONWIDTH,height=SSBUTTONHEIGHT,command=lambda:master.switch_frame(LessonInfo9),bg= "chocolate2",font = SMALLBUTTONFONT) .grid(column=2,row=3)
         tk.Button(self,text='Back',width=SSBUTTONWIDTH,height=SSBUTTONHEIGHT,command=lambda:master.switch_frame(TitleScreen),bg="orange red2",font = SMALLBUTTONFONT) .grid(column=1,row=4,pady=BACKBUTTONGAPY)
 
@@ -237,7 +237,7 @@ class Lesson1P5(LessonTemplate):
     def __init__(self,master):
         LessonTemplate.__init__(self,master)
         self.title.config(text="Differentiation;Basics")
-        self.imagefile.config(file=get_image("parrot.png"))
+        self.imagefile.config(file=get_image("congratulations.png"))
         self.pagenumber.config(text="6/6")
         self.explanation.config(text="Congratulations, you finished this lesson! You should now know how to differentiate a quadratic equation. Go back through the lesson if you're unsure on anything, otherwise take the quiz!")
         self.nextbutton.config(text="Take the Quiz!",command="")
@@ -277,7 +277,7 @@ class Lesson2P4(LessonTemplate):
     def __init__(self,master):
         LessonTemplate.__init__(self,master)
         self.title.config(text="Differentiation;Gradients")
-        self.imagefile.config(file=get_image("parrot.png"))
+        self.imagefile.config(file=get_image("congratulations.png"))
         self.pagenumber.config(text="5/5")
         self.explanation.config(text="Congratulations, you finished this lesson! You should now know how to find the gradient of a quadratic equation at a certain point. Go back through the lesson if you're unsure on anything, otherwise take the quiz!")
         self.nextbutton.config(text="Take the Quiz!",command=lambda:master.switch_frame())
@@ -346,8 +346,8 @@ class Lesson3P6(LessonTemplate):
 class Lesson3P7(LessonTemplate):
     def __init__(self,master):
         LessonTemplate.__init__(self,master)
-        self.title.config(text="Differentiation;Basics")
-        self.imagefile.config(file=get_image("parrot.png"))
+        self.title.config(text="Differentiation;Tangents")
+        self.imagefile.config(file=get_image("congratulations.png"))
         self.pagenumber.config(text="8/8")
         self.explanation.config(text="Congratulations, you finished this lesson! You should now know how to find the tangent and normal lines of an equation. Go back through the lesson if you're unsure on anything, otherwise take the quiz!")
         self.nextbutton.config(text="To the Quiz!",command=lambda:master.switch_frame())
@@ -386,8 +386,8 @@ class Lesson4P3(LessonTemplate):
 class Lesson4P4(LessonTemplate):
     def __init__(self,master):
         LessonTemplate.__init__(self,master)
-        self.title.config(text="Differentiation;Basics")
-        self.imagefile.config(file=get_image("parrot.png"))
+        self.title.config(text="Differentiation;Increase/Decrease")
+        self.imagefile.config(file=get_image("congratulations.png"))
         self.pagenumber.config(text="5/5")
         self.explanation.config(text="Congratulations, you finished this lesson! You should now know how to determine whether an equation is increasing, decreasing or stationary. Go back through the lesson if you're unsure on anything, otherwise take the quiz!")
         self.nextbutton.config(text="To the Quiz!",command=lambda:master.switch_frame())
@@ -427,7 +427,7 @@ class Lesson5P4(LessonTemplate):
     def __init__(self,master):
         LessonTemplate.__init__(self,master)
         self.title.config(text="Differentiation;Min/Max")
-        self.imagefile.config(file=get_image("parrot.png"))
+        self.imagefile.config(file=get_image("congratulations.png"))
         self.pagenumber.config(text="5/5")
         self.explanation.config(text="Congratulations, you finished this lesson! You should now know how to determine whether an equation's turning point is a minimum or a maximum. Go back through the lesson if you're unsure on anything, otherwise take the quiz!")
         self.nextbutton.config(text="To the Quiz!",command=lambda:master.switch_frame())
@@ -466,8 +466,8 @@ class Lesson6P3(LessonTemplate):
 class Lesson6P4(LessonTemplate):
     def __init__(self,master):
         LessonTemplate.__init__(self,master)
-        self.title.config(text="Differentiation;Min/Max")
-        self.imagefile.config(file=get_image("parrot.png"))
+        self.title.config(text="Integration;Basics")
+        self.imagefile.config(file=get_image("congratulations.png"))
         self.pagenumber.config(text="5/5")
         self.explanation.config(text="Congratulations, you finished this lesson! You should now know how to integrate an equation. Go back through the lesson if you're unsure on anything, otherwise take the quiz!")
         self.nextbutton.config(text="To the Quiz!",command=lambda:master.switch_frame())
@@ -497,7 +497,7 @@ class Lesson7P3(LessonTemplate):
     def __init__(self,master):
         LessonTemplate.__init__(self,master)
         self.title.config(text="Integration;Functions")
-        self.imagefile.config(file=get_image("parrot.png"))
+        self.imagefile.config(file=get_image("congratulations.png"))
         self.pagenumber.config(text="4/4")
         self.explanation.config(text="Congratulations, you finished this lesson! You should now know how to integrate to find the original equation. Go back through the lesson if you're unsure on anything, otherwise take the quiz!")
         self.nextbutton.config(text="To the Quiz!",command=lambda:master.switch_frame())
@@ -528,7 +528,7 @@ class Lesson8P2(LessonTemplate):
 class Lesson8P3(LessonTemplate):
     def __init__(self,master):
         LessonTemplate.__init__(self,master)
-        self.title.config(text="Integration;Kinematics")
+        self.title.config(text="Integration;Kinematics")    
         self.imagefile.config(file=get_image("lesson8 3.png"))
         self.pagenumber.config(text="4/5")
         self.explanation.config(text="Take a look at the worked example above where you are calculating displacement from acceleration. Note that points will be provided to you so that you can calculate the constant c.")
@@ -539,7 +539,7 @@ class Lesson8P4(LessonTemplate):
     def __init__(self,master):
         LessonTemplate.__init__(self,master)
         self.title.config(text="Integration;Kinematics")
-        self.imagefile.config(file=get_image("parrot.png"))
+        self.imagefile.config(file=get_image("congratulations.png"))
         self.pagenumber.config(text="5/5")
         self.explanation.config(text="Congratulations, you finished this lesson! You should now know the basics of kinematics. Go back through the lesson if you're unsure on anything, otherwise take the quiz!")
         self.nextbutton.config(text="To the Quiz!",command=lambda:master.switch_frame())
