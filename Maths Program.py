@@ -545,6 +545,45 @@ class Lesson8P4(LessonTemplate):
         self.nextbutton.config(text="Take the Quiz!",command=lambda:master.switch_frame())
         self.backbutton.config(text="Back to Menu",command=lambda:master.switch_frame(LessonSelect))
 
+class Quiz(tk.Frame):
+    def __init__(self,master):
+        tk.Frame.__init__(self,master)  
+        self.answerlist = []
+        self.correctanswer = ""
+        self.frametype = "place"
+        self.config(bg=BGCOLOUR)
+        self.grid_columnconfigure(0,weight=1)
+        self.grid_rowconfigure(2,weight=1,min=500)
+        title = tk.Label(self,text='Integration;Kinematics',font = HEADINGFONT, bg = BGCOLOUR)
+        title.place(relx = 0.5, rely = 0.1, anchor="center")
+        imagefile = tk.PhotoImage(file=get_image("quizDesign.png"))      
+        photolabel = tk.Label(self,image=imagefile,borderwidth=0)
+        photolabel.place(relx=0.5,rely=0.4,anchor="center")
+        photolabel.img = imagefile
+        self.useranswer = tk.StringVar()
+        explanation = tk.OptionMenu(self,self.useranswer,*self.answerList)
+        explanation.place(relx = 0.5,rely=0.7,anchor="center")
+        explanation.config(font=BUTTONFONT)
+        options = self.nametowidget(explanation.menuname)
+        options.config(font=BUTTONFONT)
+        questionnumber = tk.Label(self,text="Question 1/6",bg=BGCOLOUR,font=BUTTONFONT)
+        questionnumber.place(relx = 0.5,rely=0.9,anchor="center")
+        submitbutton = tk.Button(self,text="Submit",bg="spring green3",command=lambda:self.CheckAnswer(),font=BUTTONFONT)
+        submitbutton.place(relx = 0.8,rely=0.9,anchor="center")
+        backbutton = tk.Button(self,text="Back to Menu",bg="orange red2",font=BUTTONFONT)
+        backbutton.place(relx = 0.2,rely=0.9,anchor="center")
+    
+    def CheckAnswer(self):
+        if self.useranswer.get() == self.correctanswer:
+            print("you passed!")
+        else:
+            print("you failed")
+
+
+class FinalQuizP1(Quiz):
+    def __init__(self,master):
+        tk.Frame.__init__(self,master)
+
 
 #Defining the main subroutine
 def main():
