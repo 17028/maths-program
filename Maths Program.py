@@ -19,7 +19,6 @@ SSBUTTONHEIGHT = 4
 DIFFBG = "spring green3"
 INTBG = "royal blue2"
 SMALLBUTTONFONT = "Arial"
-testvar = "lessonInfo1"
 
 # Function to find the images in a filepath of my choosing
 def get_image(image):
@@ -72,7 +71,7 @@ class LessonSelect(tk.Frame):
         tk.Button(self,text='Lesson 1\n\nDifferentiation;Basics',width=SSBUTTONWIDTH,height=SSBUTTONHEIGHT,command=lambda:master.switch_frame(LessonInfo1),bg=DIFFBG,font = SMALLBUTTONFONT) .grid(column=0,row=1,padx=BUTTONGAPX,pady=BUTTONGAPY)
         tk.Button(self,text='Lesson 2\n\nDifferentiation;Gradients',width=SSBUTTONWIDTH,height=SSBUTTONHEIGHT,command=lambda:master.switch_frame(LessonInfo2),bg=DIFFBG,font = SMALLBUTTONFONT) .grid(column=1,row=1,padx=BUTTONGAPX)
         tk.Button(self,text='Lesson 3\n\nDifferentiation;Tangents',width=SSBUTTONWIDTH,height=SSBUTTONHEIGHT,command=lambda:master.switch_frame(LessonInfo3),bg=DIFFBG,font = SMALLBUTTONFONT) .grid(column=2,row=1,padx=BUTTONGAPX)
-        tk.Button(self,text='Lesson 4\n\nDifferentiation;Δ Graident',width=SSBUTTONWIDTH,height=SSBUTTONHEIGHT,command=lambda:master.switch_frame(LessonInfo4),bg=DIFFBG,font = SMALLBUTTONFONT) .grid(column=0,row=2,pady=BUTTONGAPY)
+        tk.Button(self,text='Lesson 4\n\nDifferentiation;Inc/Dec',width=SSBUTTONWIDTH,height=SSBUTTONHEIGHT,command=lambda:master.switch_frame(LessonInfo4),bg=DIFFBG,font = SMALLBUTTONFONT) .grid(column=0,row=2,pady=BUTTONGAPY)
         tk.Button(self,text='Lesson 5\n\nDifferentiation;Min/Max',width=SSBUTTONWIDTH,height=SSBUTTONHEIGHT,command=lambda:master.switch_frame(LessonInfo5),bg=DIFFBG,font = SMALLBUTTONFONT) .grid(column=1,row=2)
         tk.Button(self,text='Lesson 6\n\nIntegration;Basics',width=SSBUTTONWIDTH,height=SSBUTTONHEIGHT,command=lambda:master.switch_frame(LessonInfo6),bg=INTBG,font = SMALLBUTTONFONT) .grid(column=2,row=2)
         tk.Button(self,text='Lesson 7\n\nIntegration;Functions',width=SSBUTTONWIDTH,height=SSBUTTONHEIGHT,command=lambda:master.switch_frame(LessonInfo7),bg=INTBG,font = SMALLBUTTONFONT) .grid(column=0,row=3)
@@ -100,6 +99,9 @@ class LessonTemplate(tk.Frame):
         self.nextbutton.place(relx = 0.8,rely=0.9,anchor="center")
         self.backbutton = tk.Button(self,text="Back",bg="orange red2",font=BUTTONFONT,command=lambda:master.switch_frame(LessonSelect))
         self.backbutton.place(relx = 0.2,rely=0.9,anchor="center")
+
+#############################################################
+#Lesson information classes
 
 class LessonInfo1(LessonTemplate):
     def __init__(self,master):
@@ -191,7 +193,7 @@ class LessonInfo9(LessonTemplate):
 
 
 #############################################################
-#Lessons start
+#Lesson classes
 
 class Lesson1P1(LessonTemplate):
     def __init__(self,master):
@@ -240,7 +242,7 @@ class Lesson1P5(LessonTemplate):
         self.imagefile.config(file=get_image("congratulations.png"))
         self.pagenumber.config(text="6/6")
         self.explanation.config(text="Congratulations, you finished this lesson! You should now know how to differentiate a quadratic equation. Go back through the lesson if you're unsure on anything, otherwise take the quiz!")
-        self.nextbutton.config(text="Take the Quiz!",command="")
+        self.nextbutton.config(text="Take the Quiz!",command=lambda:master.switch_frame(Quiz1P1))
         self.backbutton.config(text="Back to Menu",command=lambda:master.switch_frame(LessonSelect))
 
 class Lesson2P1(LessonTemplate):
@@ -280,7 +282,7 @@ class Lesson2P4(LessonTemplate):
         self.imagefile.config(file=get_image("congratulations.png"))
         self.pagenumber.config(text="5/5")
         self.explanation.config(text="Congratulations, you finished this lesson! You should now know how to find the gradient of a quadratic equation at a certain point. Go back through the lesson if you're unsure on anything, otherwise take the quiz!")
-        self.nextbutton.config(text="Take the Quiz!",command=lambda:master.switch_frame())
+        self.nextbutton.config(text="Take the Quiz!",command=lambda:master.switch_frame(Quiz2P1))
         self.backbutton.config(text="Back to Menu",command=lambda:master.switch_frame(LessonSelect))
 
 class Lesson3P1(LessonTemplate):
@@ -329,7 +331,7 @@ class Lesson3P5(LessonTemplate):
         self.title.config(text="Differentiation;Tangents")
         self.imagefile.config(file=get_image("lesson3 5.png"))
         self.pagenumber.config(text="6/8")
-        self.explanation.config(text="Finally, substitute a,b and m into the equation y - b = m(x - a), and rearrange to find the equation of the tangent.")
+        self.explanation.config(text="Finally, substitute a, b and m into the equation y - b = m(x - a), and rearrange to find the equation of the tangent.")
         self.nextbutton.config(command=lambda:master.switch_frame(Lesson3P6))
         self.backbutton.config(command=lambda:master.switch_frame(Lesson3P4))
 
@@ -339,7 +341,7 @@ class Lesson3P6(LessonTemplate):
         self.title.config(text="Differentiation;Tangents")
         self.imagefile.config(file=get_image("lesson3 6.png"))
         self.pagenumber.config(text="7/8")
-        self.explanation.config(text="To find the normal line of a tangent, go through the same procedure as finding a tangent, except use the equation y - b = -1/m(x - a ).")
+        self.explanation.config(text="To find the normal line of a tangent, go through the same procedure as finding a tangent, except use the equation y - b = -1/m(x - a).")
         self.nextbutton.config(command=lambda:master.switch_frame(Lesson3P7))
         self.backbutton.config(command=lambda:master.switch_frame(Lesson3P5))
 
@@ -350,7 +352,7 @@ class Lesson3P7(LessonTemplate):
         self.imagefile.config(file=get_image("congratulations.png"))
         self.pagenumber.config(text="8/8")
         self.explanation.config(text="Congratulations, you finished this lesson! You should now know how to find the tangent and normal lines of an equation. Go back through the lesson if you're unsure on anything, otherwise take the quiz!")
-        self.nextbutton.config(text="Take the Quiz!",command=lambda:master.switch_frame())
+        self.nextbutton.config(text="Take the Quiz!",command=lambda:master.switch_frame(Quiz3P1))
         self.backbutton.config(text="Back to Menu",command=lambda:master.switch_frame(LessonSelect))
 
 class Lesson4P1(LessonTemplate):
@@ -390,7 +392,7 @@ class Lesson4P4(LessonTemplate):
         self.imagefile.config(file=get_image("congratulations.png"))
         self.pagenumber.config(text="5/5")
         self.explanation.config(text="Congratulations, you finished this lesson! You should now know how to determine whether an equation is increasing, decreasing or stationary. Go back through the lesson if you're unsure on anything, otherwise take the quiz!")
-        self.nextbutton.config(text="Take the Quiz!",command=lambda:master.switch_frame())
+        self.nextbutton.config(text="Take the Quiz!",command=lambda:master.switch_frame(Quiz4P1))
         self.backbutton.config(text="Back to Menu",command=lambda:master.switch_frame(LessonSelect))
 
 class Lesson5P1(LessonTemplate):
@@ -430,7 +432,7 @@ class Lesson5P4(LessonTemplate):
         self.imagefile.config(file=get_image("congratulations.png"))
         self.pagenumber.config(text="5/5")
         self.explanation.config(text="Congratulations, you finished this lesson! You should now know how to determine whether an equation's turning point is a minimum or a maximum. Go back through the lesson if you're unsure on anything, otherwise take the quiz!")
-        self.nextbutton.config(text="Take the Quiz!",command=lambda:master.switch_frame())
+        self.nextbutton.config(text="Take the Quiz!",command=lambda:master.switch_frame(Quiz5P1))
         self.backbutton.config(text="Back to Menu",command=lambda:master.switch_frame(LessonSelect))
 
 class Lesson6P1(LessonTemplate):
@@ -470,7 +472,7 @@ class Lesson6P4(LessonTemplate):
         self.imagefile.config(file=get_image("congratulations.png"))
         self.pagenumber.config(text="5/5")
         self.explanation.config(text="Congratulations, you finished this lesson! You should now know how to integrate an equation. Go back through the lesson if you're unsure on anything, otherwise take the quiz!")
-        self.nextbutton.config(text="Take the Quiz!",command=lambda:master.switch_frame())
+        self.nextbutton.config(text="Take the Quiz!",command=lambda:master.switch_frame(Quiz6P1))
         self.backbutton.config(text="Back to Menu",command=lambda:master.switch_frame(LessonSelect))
 
 class Lesson7P1(LessonTemplate):
@@ -500,7 +502,7 @@ class Lesson7P3(LessonTemplate):
         self.imagefile.config(file=get_image("congratulations.png"))
         self.pagenumber.config(text="4/4")
         self.explanation.config(text="Congratulations, you finished this lesson! You should now know how to integrate to find the original equation. Go back through the lesson if you're unsure on anything, otherwise take the quiz!")
-        self.nextbutton.config(text="Take the Quiz!",command=lambda:master.switch_frame())
+        self.nextbutton.config(text="Take the Quiz!",command=lambda:master.switch_frame(Quiz7P1))
         self.backbutton.config(text="Back to Menu",command=lambda:master.switch_frame(LessonSelect))
 
 class Lesson8P1(LessonTemplate):
@@ -542,12 +544,14 @@ class Lesson8P4(LessonTemplate):
         self.imagefile.config(file=get_image("congratulations.png"))
         self.pagenumber.config(text="5/5")
         self.explanation.config(text="Congratulations, you finished this lesson! You should now know the basics of kinematics. Go back through the lesson if you're unsure on anything, otherwise take the quiz!")
-        self.nextbutton.config(text="Take the Quiz!",command=lambda:master.switch_frame())
+        self.nextbutton.config(text="Take the Quiz!",command=lambda:master.switch_frame(Quiz8P1))
         self.backbutton.config(text="Back to Menu",command=lambda:master.switch_frame(LessonSelect))
 
 class Quiz(tk.Frame):
     def __init__(self,master):
-        tk.Frame.__init__(self,master)  
+        tk.Frame.__init__(self,master)
+        #Score counter for the final quiz
+        FinalQuizScoreCount = 3
         self.answerlist = ["hello"]
         self.correctanswer = ""
         self.frametype = "place"
@@ -574,11 +578,26 @@ class Quiz(tk.Frame):
         self.backbutton.place(relx = 0.2,rely=0.9,anchor="center")
     
     def CheckAnswer(self):
-        if self.useranswer.get() == self.correctanswer:
-            print("you passed!")
-            self.master.switch_frame(self.nextframe)
+        if self.finalquiz == True:
+            if self.useranswer.get() == self.correctanswer:
+                self.submitbutton.config(text="Correct!", command = "")
+                if self.firstattempt == True: self.master.FinalQuizScoreCount +=1
+                self.after(1000,lambda:self.master.switch_frame(self.nextframe))
+            else:
+                self.firstattempt = False
+                self.submitbutton.config(text="Incorrect (3)",bg = "orange red2", command = "")
+                self.after(1000,lambda:self.submitbutton.config(text="Incorrect (2)",bg = "orange red2", command = ""))
+                self.after(2000,lambda:self.submitbutton.config(text="Incorrect (1)",bg = "orange red2", command = ""))
+                self.after(3000,lambda:self.submitbutton.config(text="Submit",bg = "spring green3", command=lambda:self.CheckAnswer()))
         else:
-            print("you failed")
+            if self.useranswer.get() == self.correctanswer:
+                self.submitbutton.config(text="Correct!", command = "")
+                self.after(1000,lambda:self.master.switch_frame(self.nextframe))
+            else:
+                self.submitbutton.config(text="Incorrect (3)",bg = "orange red2", command = "")
+                self.after(1000,lambda:self.submitbutton.config(text="Incorrect (2)",bg = "orange red2", command = ""))
+                self.after(2000,lambda:self.submitbutton.config(text="Incorrect (1)",bg = "orange red2", command = ""))
+                self.after(3000,lambda:self.submitbutton.config(text="Submit",bg = "spring green3", command=lambda:self.CheckAnswer()))
 
     def RefreshMenu(self):
         self.explanation.destroy
@@ -586,10 +605,227 @@ class Quiz(tk.Frame):
         self.explanation.place(relx = 0.5,rely=0.7,anchor="center")
         self.explanation.config(font=BUTTONFONT)
 
+#############################################################
+#Quiz classes
+
+class Quiz1P1(Quiz):
+    def __init__(self,master):
+        Quiz.__init__(self,master)
+        self.finalquiz = False
+        self.nextframe = Quiz1P2
+        self.title.config(text="Differentiation;Basics")
+        self.answerlist = ["f'(x) = x² + 103","f'(x) = 0.5x + 4","f'(x) = x + 4", "f'(x) = 99x + 2"]
+        self.imagefile.config(file = get_image("quiz1 1.png"))
+        Quiz.RefreshMenu(self)
+        self.correctanswer = "f'(x) = x + 4"
+        self.questionnumber.config(text="Question 1/2")
+
+class Quiz1P2(Quiz):
+    def __init__(self,master):
+        Quiz.__init__(self,master)
+        self.finalquiz = False
+        self.nextframe = QuizCongratulations
+        self.title.config(text="Differentiation;Basics")
+        self.answerlist = ["f'(x) = 4x","f'(x) = 4x + 99","f'(x) = 4x² + 99", "f'(x ) = 2x² + 99x + 99"]
+        self.imagefile.config(file = get_image("quiz1 2.png"))
+        Quiz.RefreshMenu(self)
+        self.correctanswer = "f'(x) = 4x"
+        self.questionnumber.config(text="Question 2/2")
+
+class Quiz2P1(Quiz):
+    def __init__(self,master):
+        Quiz.__init__(self,master)
+        self.finalquiz = False
+        self.nextframe = Quiz2P2
+        self.title.config(text="Differentiation;Gradients")
+        self.answerlist = ["f'(x) = 6x + 3","f'(x) = 2","f'(x) = 4x²", "f'(x) = 2x + 4"]
+        self.imagefile.config(file = get_image("quiz2 1.png"))
+        Quiz.RefreshMenu(self)
+        self.correctanswer = "f'(x) = 2x + 4"
+        self.questionnumber.config(text="Question 1/2")
+
+class Quiz2P2(Quiz):
+    def __init__(self,master):
+        Quiz.__init__(self,master)
+        self.finalquiz = False
+        self.nextframe = QuizCongratulations
+        self.title.config(text="Differentiation;Gradients")
+        self.answerlist = ["f'(2) = 10","f'(3) = 14","f'(3) = 12", "f'(3) = 4x + 2"]
+        self.imagefile.config(file = get_image("quiz2 2.png"))
+        Quiz.RefreshMenu(self)
+        self.correctanswer = "f'(3) = 14"
+        self.questionnumber.config(text="Question 2/2")
+
+class Quiz3P1(Quiz):
+    def __init__(self,master):
+        Quiz.__init__(self,master)
+        self.finalquiz = False
+        self.nextframe = Quiz3P2
+        self.title.config(text="Differentiation;Tangents")
+        self.answerlist = ["y = 9x - 5","y = x + 2","y = 10x - 6", "y = x"]
+        self.imagefile.config(file = get_image("quiz3 1.png"))
+        Quiz.RefreshMenu(self)
+        self.correctanswer = "y = 10x - 6"
+        self.questionnumber.config(text="Question 1/2")
+
+class Quiz3P2(Quiz):
+    def __init__(self,master):
+        Quiz.__init__(self,master)
+        self.finalquiz = False
+        self.nextframe = QuizCongratulations
+        self.title.config(text="Differentiation;Tangents")
+        self.answerlist = ["y = -x/10 + 27.3","y = 10x + 3","y = x + 2", "y = -x/10 + 30"]
+        self.imagefile.config(file = get_image("quiz3 2.png"))
+        Quiz.RefreshMenu(self)
+        self.correctanswer = "y = -x/10 + 27.3"
+        self.questionnumber.config(text="Question 2/2")
+
+class Quiz4P1(Quiz):
+    def __init__(self,master):
+        Quiz.__init__(self,master)
+        self.finalquiz = False
+        self.nextframe = Quiz4P2
+        self.title.config(text="Differentiation;Increase/Decrease")
+        self.answerlist = ["Increasing","Decreasing","Stationary"]
+        self.imagefile.config(file = get_image("quiz4 1.png"))
+        Quiz.RefreshMenu(self)
+        self.correctanswer = "Decreasing"
+        self.questionnumber.config(text="Question 1/2")
+
+class Quiz4P2(Quiz):
+    def __init__(self,master):
+        Quiz.__init__(self,master)
+        self.finalquiz = False
+        self.nextframe = QuizCongratulations
+        self.title.config(text="Differentiation;Increase/Decrease")
+        self.answerlist = ["Increasing","Decreasing","Stationary"]
+        self.imagefile.config(file = get_image("quiz4 2.png"))
+        Quiz.RefreshMenu(self)
+        self.correctanswer = "Stationary"
+        self.questionnumber.config(text="Question 2/2")
+
+class Quiz5P1(Quiz):
+    def __init__(self,master):
+        Quiz.__init__(self,master)
+        self.finalquiz = False
+        self.nextframe = Quiz5P2
+        self.title.config(text="Differentiation;Min/Max")
+        self.answerlist = ["Maximum","Minimum"]
+        self.imagefile.config(file = get_image("quiz5 1.png"))
+        Quiz.RefreshMenu(self)
+        self.correctanswer = "Minimum"
+        self.questionnumber.config(text="Question 1/2")
+
+class Quiz5P2(Quiz):
+    def __init__(self,master):
+        Quiz.__init__(self,master)
+        self.finalquiz = False
+        self.nextframe = QuizCongratulations
+        self.title.config(text="Differentiation;Min/Max")
+        self.answerlist = ["Maximum","Minimum"]
+        self.imagefile.config(file = get_image("quiz5 2.png"))
+        Quiz.RefreshMenu(self)
+        self.correctanswer = "Maximum"
+        self.questionnumber.config(text="Question 2/2")
+
+class Quiz6P1(Quiz):
+    def __init__(self,master):
+        Quiz.__init__(self,master)
+        self.finalquiz = False
+        self.nextframe = Quiz6P2
+        self.title.config(text="Integration;Basics")
+        self.answerlist = ["f(x) = x² + 9x + c","f(x) = 2x² + 9x","(fx) = x² + 9x + 1","f(x) = 2x² + 9 + c"]
+        self.imagefile.config(file = get_image("quiz6 1.png"))
+        Quiz.RefreshMenu(self)
+        self.correctanswer = "f(x) = x² + 9x + c"
+        self.questionnumber.config(text="Question 1/2")
+
+class Quiz6P2(Quiz):
+    def __init__(self,master):
+        Quiz.__init__(self,master)
+        self.finalquiz = False
+        self.nextframe = QuizCongratulations
+        self.title.config(text="Integration;Basics")
+        self.answerlist = ["f(x) = x²/2 + cx + d","f(x) = x² + c", "f(x) = x² + 2x + d","f(x) = x²/2 + c"]
+        self.imagefile.config(file = get_image("quiz6 2.png"))
+        Quiz.RefreshMenu(self)
+        self.correctanswer = "f(x) = x²/2 + c"
+        self.questionnumber.config(text="Question 2/2")
+
+class Quiz7P1(Quiz):
+    def __init__(self,master):
+        Quiz.__init__(self,master)
+        self.finalquiz = False
+        self.nextframe = Quiz7P2
+        self.title.config(text="Integration;Functions")
+        self.answerlist = ["f(x) = x² + 3x + c","f(x) = x² + 3x", "f(x) = x² + 3x + 3","f(x) = x² + 2x + 3"]
+        self.imagefile.config(file = get_image("quiz7 1.png"))
+        Quiz.RefreshMenu(self)
+        self.correctanswer = "f(x) = x² + 3x"
+        self.questionnumber.config(text="Question 1/2")
+
+
+class Quiz7P2(Quiz):
+    def __init__(self,master):
+        Quiz.__init__(self,master)
+        self.finalquiz = False
+        self.nextframe = QuizCongratulations
+        self.title.config(text="Integration;Functions")
+        self.answerlist = ["f(x) = x²/2 + 4x - 8","f(x) = x² - 4x + 8", "f(x) = x²/2 - 4x + 8","f(x) = x²/2 + c"]
+        self.imagefile.config(file = get_image("quiz7 2.png"))
+        Quiz.RefreshMenu(self)
+        self.correctanswer = "f(x) = x²/2 - 4x + 8"
+        self.questionnumber.config(text="Question 2/2")
+
+class Quiz8P1(Quiz):
+    def __init__(self,master):
+        Quiz.__init__(self,master)
+        self.finalquiz = False
+        self.nextframe = Quiz8P2
+        self.title.config(text="Integration;Kinematics")
+        self.answerlist = ["a(t) = 4ms⁻²","a(t) = 2ms⁻²", "a(t) = 0.5ms⁻²","v(t) = 4tms⁻¹"]
+        self.imagefile.config(file = get_image("quiz8 1.png"))
+        Quiz.RefreshMenu(self)
+        self.correctanswer = "a(t) = 4ms⁻²"
+        self.questionnumber.config(text="Question 1/2")
+
+class Quiz8P2(Quiz):
+    def __init__(self,master):
+        Quiz.__init__(self,master)
+        self.finalquiz = False
+        self.nextframe = QuizCongratulations
+        self.title.config(text="Integration;Kinematics")
+        self.answerlist = ["s(0) = 0m","v(0) = 4ms⁻¹", "v(t) = 2tms⁻¹","v(0) = 3ms⁻¹"]
+        self.imagefile.config(file = get_image("quiz8 2.png"))
+        Quiz.RefreshMenu(self)
+        self.correctanswer = "v(0) = 3ms⁻¹"
+        self.questionnumber.config(text="Question 2/2")
+
+class QuizCongratulations(tk.Frame):
+    def __init__(self,master):
+        self.frametype = "place"
+        self.userinput = "hello"
+        tk.Frame.__init__(self,master)
+        self.config(bg=BGCOLOUR)
+        self.title = tk.Label(self,text='Congratulations!',font = HEADINGFONT, bg = BGCOLOUR)
+        self.title.place(relx = 0.5, rely = 0.1, anchor="center")
+        self.imagefile = tk.PhotoImage(file=get_image("congratulations.png"))      
+        self.photolabel = tk.Label(self,image=self.imagefile,borderwidth=0)
+        self.photolabel.place(relx=0.5,rely=0.4,anchor="center")
+        self.photolabel.img = self.imagefile
+        self.explanation = tk.Label(self,text="Congratulations, you have finished this quiz! Redo this lesson if you feel unsure about it, move on to other lessons if you feel confident, and if you're comfortable with everything then attempt the final quiz! ",font=BUTTONFONT,wraplength = 1000, bg = BGCOLOUR)
+        self.explanation.place(relx = 0.5,rely=0.7,anchor="center")
+        self.explanation.config(font=BUTTONFONT)
+        self.submitbutton = tk.Button(self,text="Back to Menu",bg="spring green3",command=lambda:master.switch_frame(LessonSelect),font=BUTTONFONT)
+        self.submitbutton.place(relx = 0.5,rely=0.9,anchor="center")
+
 
 class FinalQuizP1(Quiz):
     def __init__(self,master):
         Quiz.__init__(self,master)
+        self.finalquiz = True
+        self.firstattempt = True
+        master.FinalQuizScoreCount = 0
         self.nextframe = FinalQuizP2
         self.answerlist = ["f'(x) = 3x² + 4x + 2","f'(x) = 6x + 4","f'(x) = 6x² + 6", "f'(x) = 3x + 4"]
         self.imagefile.config(file=get_image("quizfinal 1.png"))
@@ -600,6 +836,8 @@ class FinalQuizP1(Quiz):
 class FinalQuizP2(Quiz):
     def __init__(self,master):
         Quiz.__init__(self,master)
+        self.finalquiz = True
+        self.firstattempt = True
         self.nextframe = FinalQuizP3
         self.answerlist = ["f'(2) = 41","f'(2) = 8","f'(2) = 11","f'(2) = 12"]
         self.imagefile.config(file=get_image("quizfinal 2.png"))
@@ -610,6 +848,8 @@ class FinalQuizP2(Quiz):
 class FinalQuizP3(Quiz):
     def __init__(self,master):
         Quiz.__init__(self,master)
+        self.finalquiz = True
+        self.firstattempt = True
         self.nextframe = FinalQuizP4
         self.answerlist = ["y = 12x - 6","y = 4x + 4","y = 8x - 17","y = x + 2"]
         self.imagefile.config(file=get_image("quizfinal 3.png"))
@@ -620,16 +860,21 @@ class FinalQuizP3(Quiz):
 class FinalQuizP4(Quiz):
     def __init__(self,master):
         Quiz.__init__(self,master)
+        self.finalquiz = True
+        self.firstattempt = True
         self.nextframe = FinalQuizP5
         self.answerlist = ["Increasing","Decreasing","Stationary"]
         self.imagefile.config(file=get_image("quizfinal 4.png"))
         Quiz.RefreshMenu(self)
         self.correctanswer = "Increasing"
         self.questionnumber.config(text="Question 4/8")
+        print(master.FinalQuizScoreCount)
 
 class FinalQuizP5(Quiz):
     def __init__(self,master):
         Quiz.__init__(self,master)
+        self.finalquiz = True
+        self.firstattempt = True
         self.nextframe = FinalQuizP6
         self.answerlist = ["Minimum","Maximum"]
         self.imagefile.config(file=get_image("quizfinal 5.png"))
@@ -640,6 +885,8 @@ class FinalQuizP5(Quiz):
 class FinalQuizP6(Quiz):
     def __init__(self,master):
         Quiz.__init__(self,master)
+        self.finalquiz = True
+        self.firstattempt = True
         self.nextframe = FinalQuizP7
         self.answerlist = ["4x²+ 4x + 4","2x² + 4","2x⁴ + 4x + c","2x² + 4x + c"]
         self.imagefile.config(file=get_image("quizfinal 6.png"))
@@ -650,6 +897,8 @@ class FinalQuizP6(Quiz):
 class FinalQuizP7(Quiz):
     def __init__(self,master):
         Quiz.__init__(self,master)
+        self.finalquiz = True
+        self.firstattempt = True
         self.nextframe = FinalQuizP8
         self.answerlist = ["2x² + 2 + c","3x² - 3x + c","3x² + 3x + 4","3x² - 3x - 4"]
         self.imagefile.config(file=get_image("quizfinal 7.png"))
@@ -660,13 +909,32 @@ class FinalQuizP7(Quiz):
 class FinalQuizP8(Quiz):
     def __init__(self,master):
         Quiz.__init__(self,master)
-        self.nextframe = ""
-        self.answerlist = ["a(t) = 2 ms⁻²","a(t) = 3 ms⁻²","a(t) = 4 ms⁻²","a(t) = 55 ms⁻²"]
+        self.finalquiz = True
+        self.firstattempt = True
+        self.nextframe = FinalCongratulations
+        self.answerlist = ["a(t) = 2ms⁻²","a(t) = 3ms⁻²","a(t) = 4ms⁻²","a(t) = 55ms⁻²"]
         self.imagefile.config(file=get_image("quizfinal 8.png"))
         Quiz.RefreshMenu(self)
-        self.correctanswer = "a(t) = 2 ms⁻²"
+        self.correctanswer = "a(t) = 2ms⁻²"
         self.questionnumber.config(text="Question 8/8")
 
+class FinalCongratulations(Quiz):
+    def __init__(self,master):
+        self.frametype = "place"
+        self.userinput = "hello"
+        tk.Frame.__init__(self,master)
+        self.config(bg=BGCOLOUR)
+        self.title = tk.Label(self,text='Congratulations!',font = HEADINGFONT, bg = BGCOLOUR)
+        self.title.place(relx = 0.5, rely = 0.1, anchor="center")
+        self.imagefile = tk.PhotoImage(file=get_image("congratulations.png"))      
+        self.photolabel = tk.Label(self,image=self.imagefile,borderwidth=0)
+        self.photolabel.place(relx=0.5,rely=0.4,anchor="center")
+        self.photolabel.img = self.imagefiley
+        self.explanation = tk.Label(self,text=master.FinalQuizScoreCount,font=BUTTONFONT,wraplength = 1000, bg = BGCOLOUR)
+        self.explanation.place(relx = 0.5,rely=0.7,anchor="center")
+        self.explanation.config(font=BUTTONFONT)
+        self.submitbutton = tk.Button(self,text="Back to Menu",bg="spring green3",command=lambda:master.switch_frame(LessonSelect),font=BUTTONFONT)
+        self.submitbutton.place(relx = 0.5,rely=0.9,anchor="center")
 
 #Defining the main subroutine
 def main():
