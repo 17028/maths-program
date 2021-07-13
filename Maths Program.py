@@ -1,6 +1,7 @@
 import tkinter as tk
 from tkinter.constants import BOTH, TRUE
 import os
+import csv
 
 #Main menu constants
 BUTTONHEIGHT = 2
@@ -20,13 +21,16 @@ DIFFBG = "spring green3"
 INTBG = "royal blue2"
 SMALLBUTTONFONT = "Arial"
 
+#High score file
+HIGHSCOREFILE = "values.txt"
+
 # Function to find the images in a filepath of my choosing
 def get_image(image):
     # Gets the path of the program itself
     dir = os.path.dirname(__file__) 
     # Finding a filepath in the program's directory
     filename = os.path.join(dir, 'Images',str(image)) 
-    return filename
+    return filename    
 
 #The main class, defining the root window
 class Maths(tk.Tk):
@@ -122,6 +126,7 @@ class LessonInfo2(LessonTemplate):
         self.explanation.config(text="This lesson will explain to you what a gradient is, how differentiation relates to gradients and how to use differentiation to find a graident.")
         self.nextbutton.config(command=lambda:master.switch_frame(Lesson2P1))
         self.backbutton.config(command=lambda:master.switch_frame(LessonSelect))
+
 class LessonInfo3(LessonTemplate):
     def __init__(self,master):
         LessonTemplate.__init__(self,master)
@@ -186,7 +191,7 @@ class LessonInfo9(LessonTemplate):
     def __init__(self,master):
         LessonTemplate.__init__(self,master)
         self.title.config(text="Final Quiz")
-        self.imagefile.config(file=get_image("shrek.gif"),format="gif -index 1600")
+        self.imagefile.config(file=get_image("finalquiz.png"))
         self.explanation.config(text="This is the final quiz! You should be comfortable with all of the topics and concepts covered in this program before you attempt this.")
         self.nextbutton.config(text="Start the quiz!",command=lambda:master.switch_frame(FinalQuizP1))
         self.backbutton.config(command=lambda:master.switch_frame(LessonSelect))
@@ -547,6 +552,7 @@ class Lesson8P4(LessonTemplate):
         self.nextbutton.config(text="Take the Quiz!",command=lambda:master.switch_frame(Quiz8P1))
         self.backbutton.config(text="Back to Menu",command=lambda:master.switch_frame(LessonSelect))
 
+#Template class for quiz
 class Quiz(tk.Frame):
     def __init__(self,master):
         tk.Frame.__init__(self,master)
@@ -560,7 +566,7 @@ class Quiz(tk.Frame):
         self.grid_rowconfigure(2,weight=1,min=500)
         self.title = tk.Label(self,text='Final Quiz',font = HEADINGFONT, bg = BGCOLOUR)
         self.title.place(relx = 0.5, rely = 0.1, anchor="center")
-        self.imagefile = tk.PhotoImage(file=get_image("quizDesign.png"))      
+        self.imagefile = tk.PhotoImage(file=get_image("congratulations.png"))      
         self.photolabel = tk.Label(self,image=self.imagefile,borderwidth=0)
         self.photolabel.place(relx=0.5,rely=0.4,anchor="center")
         self.photolabel.img = self.imagefile
@@ -868,7 +874,6 @@ class FinalQuizP4(Quiz):
         Quiz.RefreshMenu(self)
         self.correctanswer = "Increasing"
         self.questionnumber.config(text="Question 4/8")
-        print(master.FinalQuizScoreCount)
 
 class FinalQuizP5(Quiz):
     def __init__(self,master):
@@ -922,6 +927,8 @@ class FinalCongratulations(Quiz):
     def __init__(self,master):
         self.frametype = "place"
         self.userinput = "hello"
+        with open(get_image(HIGHSCOREFILE),"r+") as TXT_FILE:
+            self.highscore = TXT_FILE.readline()
         tk.Frame.__init__(self,master)
         self.config(bg=BGCOLOUR)
         self.title = tk.Label(self,text='Congratulations!',font = HEADINGFONT, bg = BGCOLOUR)
@@ -929,12 +936,25 @@ class FinalCongratulations(Quiz):
         self.imagefile = tk.PhotoImage(file=get_image("congratulations.png"))      
         self.photolabel = tk.Label(self,image=self.imagefile,borderwidth=0)
         self.photolabel.place(relx=0.5,rely=0.4,anchor="center")
-        self.photolabel.img = self.imagefiley
-        self.explanation = tk.Label(self,text=master.FinalQuizScoreCount,font=BUTTONFONT,wraplength = 1000, bg = BGCOLOUR)
+        self.photolabel.img = self.imagefile
+        self.explanation = tk.Label(self,text="",font=BUTTONFONT,wraplength = 1000, bg = BGCOLOUR)
+        if  int(master.FinalQuizScoreCount) > int(self.highscore):
+            self.highscore = int(master.FinalQuizScoreCount)
+            self.explanation.config(text="Congratulations, you got " + str(master.FinalQuizScoreCount) + " questions right on the first try! This is your new high score!")
+        elif int(self.highscore) == int(master.FinalQuizScoreCount):
+            self.explanation.config(text="Congratulations, you got " + str(master.FinalQuizScoreCount) + " questions right on the first try! This is equal to your old high score!")
+        else:
+            self.explanation.config(self,text="Congratulations, you got " + str(master.FinalQuizScoreCount) + " questions right on the first try! Unfortunately, you didn't beat your high score of " + str(self.highscore))
         self.explanation.place(relx = 0.5,rely=0.7,anchor="center")
         self.explanation.config(font=BUTTONFONT)
-        self.submitbutton = tk.Button(self,text="Back to Menu",bg="spring green3",command=lambda:master.switch_frame(LessonSelect),font=BUTTONFONT)
+        self.submitbutton = tk.Button(self,text="Back to Menu",bg="spring green3",command=self.exportScore(),font=BUTTONFONT)
         self.submitbutton.place(relx = 0.5,rely=0.9,anchor="center")
+        
+    def exportScore(self):
+        print(self.highscore)
+        with open(get_image(HIGHSCOREFILE),"r+") as TXT_FILE:
+            TXT_FILE.write(str(self.highscore))
+        self.master.switch_frame(LessonSelect)
 
 #Defining the main subroutine
 def main():
