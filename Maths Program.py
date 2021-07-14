@@ -590,10 +590,10 @@ class Quiz(tk.Frame):
             if self.useranswer.get() == self.correctanswer:
                 self.submitbutton.config(text="Correct!", command = "")
                 if self.firstattempt == True: self.master.FinalQuizScoreCount +=1
-                self.after(1000,lambda:self.master.switch_frame(self.nextframe))
+                self.after(2000,lambda:self.master.switch_frame(self.nextframe))
             elif self.useranswer.get() == "":
                 self.submitbutton.config(text="Please select an answer!", bg = "orange red2",command = "")
-                self.after(1000,lambda:self.submitbutton.config(text="Submit",bg="spring green3",command=lambda:self.CheckAnswer()))
+                self.after(2000,lambda:self.submitbutton.config(text="Submit",bg="spring green3",command=lambda:self.CheckAnswer()))
             else:
                 self.firstattempt = False
                 self.submitbutton.config(text="Incorrect (3)",bg = "orange red2", command = "")
@@ -603,7 +603,10 @@ class Quiz(tk.Frame):
         else:
             if self.useranswer.get() == self.correctanswer:
                 self.submitbutton.config(text="Correct!", command = "")
-                self.after(1000,lambda:self.master.switch_frame(self.nextframe))
+                self.after(2000,lambda:self.master.switch_frame(self.nextframe))
+            elif self.useranswer.get() == "":
+                self.submitbutton.config(text="Please select an answer!", bg = "orange red2",command = "")
+                self.after(2000,lambda:self.submitbutton.config(text="Submit",bg="spring green3",command=lambda:self.CheckAnswer()))
             else:
                 self.submitbutton.config(text="Incorrect (3)",bg = "orange red2", command = "")
                 self.after(1000,lambda:self.submitbutton.config(text="Incorrect (2)",bg = "orange red2", command = ""))
