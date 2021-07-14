@@ -105,7 +105,7 @@ class LessonTemplate(tk.Frame):
         self.backbutton.place(relx = 0.2,rely=0.9,anchor="center")
 
 #############################################################
-#Lesson information classes
+#Lesson information classes, where each class is an instance of the template class defined above
 
 class LessonInfo1(LessonTemplate):
     def __init__(self,master):
@@ -192,13 +192,15 @@ class LessonInfo9(LessonTemplate):
         LessonTemplate.__init__(self,master)
         self.title.config(text="Final Quiz")
         self.imagefile.config(file=get_image("finalquiz.png"))
-        self.explanation.config(text="This is the final quiz! You should be comfortable with all of the topics and concepts covered in this program before you attempt this.")
+        with open(get_image(HIGHSCOREFILE),"r+") as TXT_FILE:
+            self.highscore = TXT_FILE.readline()
+        self.explanation.config(text="This is the final quiz! You should be comfortable with all of the topics and concepts covered in this program before you attempt this. \nYour current high score is: " + str(self.highscore) + ".")
         self.nextbutton.config(text="Start the quiz!",command=lambda:master.switch_frame(FinalQuizP1))
         self.backbutton.config(command=lambda:master.switch_frame(LessonSelect))
 
 
 #############################################################
-#Lesson classes
+#Lesson classes, again where each class is an instance of the template class
 
 class Lesson1P1(LessonTemplate):
     def __init__(self,master):
@@ -552,7 +554,7 @@ class Lesson8P4(LessonTemplate):
         self.nextbutton.config(text="Take the Quiz!",command=lambda:master.switch_frame(Quiz8P1))
         self.backbutton.config(text="Back to Menu",command=lambda:master.switch_frame(LessonSelect))
 
-#Template class for quiz
+#Template class for quiz - each quiz page/class will be an instance of this class
 class Quiz(tk.Frame):
     def __init__(self,master):
         tk.Frame.__init__(self,master)
@@ -589,6 +591,9 @@ class Quiz(tk.Frame):
                 self.submitbutton.config(text="Correct!", command = "")
                 if self.firstattempt == True: self.master.FinalQuizScoreCount +=1
                 self.after(1000,lambda:self.master.switch_frame(self.nextframe))
+            elif self.useranswer.get() == "":
+                self.submitbutton.config(text="Please select an answer!", bg = "orange red2",command = "")
+                self.after(1000,lambda:self.submitbutton.config(text="Submit",bg="spring green3",command=lambda:self.CheckAnswer()))
             else:
                 self.firstattempt = False
                 self.submitbutton.config(text="Incorrect (3)",bg = "orange red2", command = "")
@@ -938,23 +943,32 @@ class FinalCongratulations(Quiz):
         self.photolabel.place(relx=0.5,rely=0.4,anchor="center")
         self.photolabel.img = self.imagefile
         self.explanation = tk.Label(self,text="",font=BUTTONFONT,wraplength = 1000, bg = BGCOLOUR)
-        if  int(master.FinalQuizScoreCount) > int(self.highscore):
+        if int(master.FinalQuizScoreCount) == 8:
             self.highscore = int(master.FinalQuizScoreCount)
-            self.explanation.config(text="Congratulations, you got " + str(master.FinalQuizScoreCount) + " questions right on the first try! This is your new high score!")
+            self.explanation.config(text="Congratulations, you got all 8 questions right on the first try! You have finished all of the lessons within this program, and you should now be comfortable with all of the major topics covered in Level 2 Calculus. Feel free to go back through this program as required, otherwise start doing practice tests!")
+        elif  int(master.FinalQuizScoreCount) > int(self.highscore):
+            self.highscore = int(master.FinalQuizScoreCount)
+            self.explanation.config(text="Congratulations, you got " + str(master.FinalQuizScoreCount) + " questions right on the first try! This is your new high score! Try again for a better high score!")
         elif int(self.highscore) == int(master.FinalQuizScoreCount):
-            self.explanation.config(text="Congratulations, you got " + str(master.FinalQuizScoreCount) + " questions right on the first try! This is equal to your old high score!")
+            self.explanation.config(text="Congratulations, you got " + str(master.FinalQuizScoreCount) + " questions right on the first try! This is equal to your old high score! Try again for a better high score!")
         else:
-            self.explanation.config(self,text="Congratulations, you got " + str(master.FinalQuizScoreCount) + " questions right on the first try! Unfortunately, you didn't beat your high score of " + str(self.highscore))
+            self.explanation.config(text="Congratulations, you got " + str(master.FinalQuizScoreCount) + " questions right on the first try! Unfortunately, you didn't beat your high score of " + str(self.highscore) + ". Try again for a better high score!")
         self.explanation.place(relx = 0.5,rely=0.7,anchor="center")
         self.explanation.config(font=BUTTONFONT)
-        self.submitbutton = tk.Button(self,text="Back to Menu",bg="spring green3",command=self.exportScore(),font=BUTTONFONT)
-        self.submitbutton.place(relx = 0.5,rely=0.9,anchor="center")
+        self.backbutton = tk.Button(self,text="Back to Menu",bg="spring green3",command=lambda:self.ExportScore(),font=BUTTONFONT)
+        self.backbutton.place(relx = 0.8,rely=0.9,anchor="center")
+        self.resetbutton = tk.Button(self,text="Reset Score",bg="orange red2",command=lambda:self.ResetScore(),font=BUTTONFONT)
+        self.resetbutton.place(relx = 0.2,rely=0.9,anchor="center")
         
-    def exportScore(self):
-        print(self.highscore)
+    def ExportScore(self):
         with open(get_image(HIGHSCOREFILE),"r+") as TXT_FILE:
             TXT_FILE.write(str(self.highscore))
         self.master.switch_frame(LessonSelect)
+    
+    def ResetScore(self):
+        with open(get_image(HIGHSCOREFILE),"r+") as TXT_FILE:
+            TXT_FILE.write("0")
+        self.resetbutton.config(text="Reset to 0!",command="")
 
 #Defining the main subroutine
 def main():
