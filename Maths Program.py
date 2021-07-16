@@ -3,7 +3,7 @@ from tkinter.constants import BOTH, TRUE
 import os
 import csv
 
-#Main menu constants
+# Main menu constants
 BUTTONHEIGHT = 2
 BUTTONWIDTH = 15
 TITLEFONT = "Consolas",100
@@ -11,7 +11,7 @@ HEADINGFONT = "Consolas",50
 BUTTONFONT = "Arial",20
 BGCOLOUR = "light grey"
 
-#Selection Screen Constants
+# Selection Screen Constants
 BUTTONGAPX = 50
 BUTTONGAPY = 20
 BACKBUTTONGAPY = 40
@@ -21,18 +21,22 @@ DIFFBG = "spring green3"
 INTBG = "royal blue2"
 SMALLBUTTONFONT = "Arial"
 
-#High score file
+# High score file
 HIGHSCOREFILE = "values.txt"
 
-# Function to find the images in a filepath of my choosing
+# Images directory - name of the folder in the root path of the program
+IMAGEDIRECTORY = "Images"
+
+# Function to find the images in a filepath of my choosing, to allow assets to be stored in a folder instead of the program's root directory
+# This allows me to simply specify the 
 def get_image(image):
     # Gets the path of the program itself
     dir = os.path.dirname(__file__) 
     # Finding a filepath in the program's directory
-    filename = os.path.join(dir, 'Images',str(image)) 
+    filename = os.path.join(dir, IMAGEDIRECTORY,str(image)) 
     return filename    
 
-#The main class, defining the root window
+#T he main class, defining the root window
 class Maths(tk.Tk):
     def __init__(self):
         tk.Tk.__init__(self)
@@ -40,7 +44,7 @@ class Maths(tk.Tk):
         self.switch_frame(TitleScreen)
         self.title("L2 Calculus Program")
 
-    #The frame switch method
+    # The frame switch method
     def switch_frame(self,frame_class):
         new_frame = frame_class(self)
         if self._frame is not None:
@@ -52,9 +56,10 @@ class Maths(tk.Tk):
         elif self._frame.frametype == ("grid"):
             self._frame.pack()
         else:
+            # This is more for debugging than anything else
             print("error! no frametype specified")
 
-#Title screen widgets
+# Title screen widgets - this class is the whole of the page - no template was used because there is only one of this type of page
 class TitleScreen(tk.Frame):
     def __init__(self,master):
         self.frametype = "grid"
@@ -65,7 +70,7 @@ class TitleScreen(tk.Frame):
         tk.Label(self,text="",bg=BGCOLOUR) .grid(column=1)
         tk.Button(self,text="Quit",font=BUTTONFONT,bg="orange red2",width = BUTTONWIDTH, height = BUTTONHEIGHT,command=quit) .grid(column=1,pady=30)
 
-#Lesson select screen widgets
+# Lesson select screen widgets - again, no template because there is only one of this type of page
 class LessonSelect(tk.Frame):
     def __init__(self,master):
         self.frametype = "grid"
@@ -85,44 +90,49 @@ class LessonSelect(tk.Frame):
 
 #The template for lesson information screens, all lesson information screens will be LessonTemplate type objects
 class LessonTemplate(tk.Frame):
+    # Defining everything to run when this class is initalized
     def __init__(self,master):
+        # Defining frametype for the frame switch method
         self.frametype = "place"
-        tk.Frame.__init__(self,master)  
+        tk.Frame.__init__(self,master)
+        # Setting the background colour to be a constant varialbe  
         self.config(bg=BGCOLOUR)
+        # Constant variables for title font and background colour, to ensure consistency and easy editing in the future
+        # Note that the title is blank, as this is a template - title will vary across lessons, so no point in setting a "default" title
         self.title = tk.Label(self,text="",font = HEADINGFONT, bg = BGCOLOUR)
         self.title.place(relx = 0.5, rely = 0.1, anchor="center")
+        # Again, blank image as image will vary across every single lesson
         self.imagefile = tk.PhotoImage(file="") 
         self.photolabel = tk.Label(self,image=self.imagefile,borderwidth=0)
         self.photolabel.place(relx=0.5,rely=0.4,anchor="center")
-        self.photolabel.img = self.imagefile      
+        self.photolabel.img = self.imagefile
+        # Blank explanation because of variation, no point in a default      
         self.explanation = tk.Label(self,text="",font=BUTTONFONT,wraplength = 1000, bg = BGCOLOUR)
         self.explanation.place(relx = 0.5,rely=0.7,anchor="center")
         self.pagenumber = tk.Label(self,text="Page 1/1",bg=BGCOLOUR,font=BUTTONFONT)
         self.pagenumber.place(relx = 0.5,rely=0.9,anchor="center")
         self.nextbutton = tk.Button(self,text="Next",bg="spring green3",font=BUTTONFONT)
         self.nextbutton.place(relx = 0.8,rely=0.9,anchor="center")
-        self.backbutton = tk.Button(self,text="Back",bg="orange red2",font=BUTTONFONT,command=lambda:master.switch_frame(LessonSelect))
+        self.backbutton = tk.Button(self,text="Back",bg="orange red2",font=BUTTONFONT)
         self.backbutton.place(relx = 0.2,rely=0.9,anchor="center")
-    
-    def ResetScore(self):
-        with open(get_image(HIGHSCOREFILE),"r+") as TXT_FILE:
-            TXT_FILE.write("0")
-        self.resetbutton.config(text="Reset to 0!",command="")
-        with open(get_image(HIGHSCOREFILE),"r+") as TXT_FILE:
-            self.highscore = TXT_FILE.readline()
-        self.explanation.config(text="This is the final quiz! You should be comfortable with all of the topics and concepts covered in this program before you attempt this. \nYour current high score is: " + str(self.highscore) + ".")
-        self.after(2000,lambda:self.resetbutton.destroy())
-        self.after(2000,lambda:self.pagenumber.config(text="1/1"))
-#############################################################
-#Lesson information classes, where each class is an instance of the template class defined above
 
+#############################################################
+
+#Lesson information classes, where each class is an instance of the template class defined above
 class LessonInfo1(LessonTemplate):
+    # Everything is run upon initialization of the class
     def __init__(self,master):
+        # Initalization of the template is run first so that each lesson has all of the widgets/objects present in the parent class
         LessonTemplate.__init__(self,master)
+        # Setting the title
         self.title.config(text="Differentiation;Basics")
+        # Setting the image file - you can see the get_image function at work here, and it works really well
         self.imagefile.config(file=get_image("1.png"))
+        # Setting the page number
         self.pagenumber.config(text="1/6")
+        # Setting the explanation
         self.explanation.config(text="This lesson will explain to you the basics behind differentation, how to differentiate a quadratic and what differentiation actually does.")
+        # Configuring the back and next buttons to go to the correct pages
         self.nextbutton.config(command=lambda:master.switch_frame(Lesson1P1))
         self.backbutton.config(command=lambda:master.switch_frame(LessonSelect))
 
@@ -201,22 +211,40 @@ class LessonInfo9(LessonTemplate):
         LessonTemplate.__init__(self,master)
         self.title.config(text="Final Quiz")
         self.imagefile.config(file=get_image("finalquiz.png"))
+        # This extra bit of code detects displays the user's high score and displays it
         with open(get_image(HIGHSCOREFILE),"r+") as TXT_FILE:
             self.highscore = TXT_FILE.readline()
         self.explanation.config(text="This is the final quiz! You should be comfortable with all of the topics and concepts covered in this program before you attempt this. \nYour current high score is: " + str(self.highscore) + ".")
+        # This if/else statement checks if the user's high score is above 0; if it is then it offers the user the choice of resetting their high score back to 0
         if int(self.highscore) == 0:
             self.pagenumber.config(text="1/1")
         elif int(self.highscore) > 0:
             self.pagenumber.config(text="")
-            self.resetbutton = tk.Button(self,text="Reset high score",bg="spring green3",font=BUTTONFONT,command=lambda:LessonTemplate.ResetScore(self))
+            self.resetbutton = tk.Button(self,text="Reset high score",bg="spring green3",font=BUTTONFONT,command=lambda:self.ResetScore())
             self.resetbutton.place(relx = 0.5,rely=0.9,anchor="center")
-            
         self.nextbutton.config(text="Start the quiz!",command=lambda:master.switch_frame(FinalQuizP1))
         self.backbutton.config(command=lambda:master.switch_frame(LessonSelect))
+    
+    # This method is used for the final quiz lesson information screen (aka LessonInfo9) to reset the highscore before taking the quiz
+    # This was initially a subroutine under the LessonTemplate class, but because no other instances of that class used this subroutine I moved it here, where it was actually used
+    def ResetScore(self):
+        # Sets the high score as "0" in the highscore file
+        with open(get_image(HIGHSCOREFILE),"r+") as TXT_FILE:
+            TXT_FILE.write("0")
+        # Changes the name of the button to say "reset to 0"
+        self.resetbutton.config(text="Reset to 0!",command="")
+        # Refreshing the explanation text to display the updated high score (0)
+        with open(get_image(HIGHSCOREFILE),"r+") as TXT_FILE:
+            self.highscore = TXT_FILE.readline()
+        self.explanation.config(text="This is the final quiz! You should be comfortable with all of the topics and concepts covered in this program before you attempt this. \nYour current high score is: " + str(self.highscore) + ".")
+        # After 2 seconds, the reset to 0 button is destroyed and replaced with the normal pagenumber display
+        self.after(2000,lambda:self.resetbutton.destroy())
+        self.after(2000,lambda:self.pagenumber.config(text="1/1"))
 
 
 #############################################################
-#Lesson classes, again where each class is an instance of the template class
+# Lesson classes, again where each class is an instance of the template class
+# These don't differ greatly from the lesson template pages
 
 class Lesson1P1(LessonTemplate):
     def __init__(self,master):
@@ -506,7 +534,7 @@ class Lesson7P1(LessonTemplate):
         self.pagenumber.config(text="2/4")
         self.explanation.config(text="To find the original equation of a gradient, a point will be provided to you. Integrate the equation to get to the state where you have the unknown of '+c' (previous lesson). Then substitute in your point and solve for x.")
         self.nextbutton.config(command=lambda:master.switch_frame(Lesson7P2))
-        self.backbutton.config(command=lambda:master.switch_frame(LessonInfo6))
+        self.backbutton.config(command=lambda:master.switch_frame(LessonInfo7))
 
 class Lesson7P2(LessonTemplate):
     def __init__(self,master):
@@ -574,80 +602,120 @@ class Lesson8P4(LessonTemplate):
 class Quiz(tk.Frame):
     def __init__(self,master):
         tk.Frame.__init__(self,master)
-        #Score counter for the final quiz
+        #Score counter for the final quiz, will be accessed later outside of this class 
         FinalQuizScoreCount = 3
-        self.answerlist = ["hello"]
+        # Answerlist varies per question, and will be defined differently every question, therefore no point in a default 
+        self.answerlist = [""]
+        # Same as above, no point in default
         self.correctanswer = ""
+        # Setting frametype for the swich frame function
         self.frametype = "place"
+        # Background colour is set to a constant variable for consistenty
         self.config(bg=BGCOLOUR)
-        self.grid_columnconfigure(0,weight=1)
-        self.grid_rowconfigure(2,weight=1,min=500)
+        # This is for the final quizzes - this boolean is used to check whether it is the user's first attempt or not
+        self.firstattempt = True
+        # Unlike the lessons, the title WILL be consistent across some of the quizzes (the final quiz), therefore a default makes sense in this case
         self.title = tk.Label(self,text='Final Quiz',font = HEADINGFONT, bg = BGCOLOUR)
         self.title.place(relx = 0.5, rely = 0.1, anchor="center")
+        # No point in a default for the images, however setting to be blank throws up an error so a random image is used
         self.imagefile = tk.PhotoImage(file=get_image("congratulations.png"))      
         self.photolabel = tk.Label(self,image=self.imagefile,borderwidth=0)
         self.photolabel.place(relx=0.5,rely=0.4,anchor="center")
         self.photolabel.img = self.imagefile
+        # User answer is set as a string, saves me from having to do str() constantly
         self.useranswer = tk.StringVar()
+        # Sets the answering optionmenu to display everything within the answerlist and set the selected answer to the useranswer varible
         self.explanation = tk.OptionMenu(self,self.useranswer,*self.answerlist)
         self.explanation.place(relx = 0.5,rely=0.7,anchor="center")
         self.explanation.config(font=BUTTONFONT)
+        # The optionmenu object has to be given a name via the nametowidget setting to set a custom font for the selected answer
         self.options = self.nametowidget(self.explanation.menuname)
         self.options.config(font=BUTTONFONT)
+        # Question number will vary, no point in default
         self.questionnumber = tk.Label(self,text="",bg=BGCOLOUR,font=BUTTONFONT)
         self.questionnumber.place(relx = 0.5,rely=0.9,anchor="center")
+        # Submitting will run the CheckAnswer function, and giving up kicks the user back out to the main menu
         self.submitbutton = tk.Button(self,text="Submit",bg="spring green3",command=lambda:self.CheckAnswer(),font=BUTTONFONT)
         self.submitbutton.place(relx = 0.8,rely=0.9,anchor="center")
         self.backbutton = tk.Button(self,text="Give Up",bg="orange red2",command=lambda:master.switch_frame(LessonSelect),font=BUTTONFONT)
         self.backbutton.place(relx = 0.2,rely=0.9,anchor="center")
+        
     
+    # The subroutine for checking whether the answer is correct and whether it should count as a point
     def CheckAnswer(self):
+        # If it is a question in the final quiz:
         if self.finalquiz == True:
+            # If the user's answer is the same as the correct answer:
             if self.useranswer.get() == self.correctanswer:
+                # Button changes to say correct and disply a different shade of green
                 self.submitbutton.config(text="Correct!", bg="lawn green",command = "")
+                # IF it is the user's first attempt, then score count is upped
                 if self.firstattempt == True: self.master.FinalQuizScoreCount +=1
+                # In 2 seconds, the next frame is called
                 self.after(2000,lambda:self.master.switch_frame(self.nextframe))
+            # If the user's answer is blank (i.e nothing was selected)
             elif self.useranswer.get() == "":
+                # They asked to select an answer by changing the button text, and in 2 seconds the button reverts to normal
+                # Note that this doesn't change the status of firstattempt - a blank submission doesn't count as an attempt
                 self.submitbutton.config(text="Please select an answer!", bg = "orange red2",command = "")
                 self.after(2000,lambda:self.submitbutton.config(text="Submit",bg="spring green3",command=lambda:self.CheckAnswer()))
+            # Else if the user's answer is incorrect:
             else:
+                # Firstattempt is set to false so that any subsequent answers don't count towards the final score
                 self.firstattempt = False
+                # They are told incorrect, and for 3 seconds the submit button ceases to function
                 self.submitbutton.config(text="Incorrect (3)",bg = "orange red2", command = "")
                 self.after(1000,lambda:self.submitbutton.config(text="Incorrect (2)",bg = "orange red2", command = ""))
                 self.after(2000,lambda:self.submitbutton.config(text="Incorrect (1)",bg = "orange red2", command = ""))
                 self.after(3000,lambda:self.submitbutton.config(text="Submit",bg = "spring green3", command=lambda:self.CheckAnswer()))
+        # If it is just a normal quiz (i.e part of the lessons)
         else:
+            # If the answer is correct, the user is told they are correct and the next frame is switched to
             if self.useranswer.get() == self.correctanswer:
                 self.submitbutton.config(text="Correct!", bg="lawn green",command = "")
                 self.after(2000,lambda:self.master.switch_frame(self.nextframe))
+            # If blank, they are told "please selct an answer"
             elif self.useranswer.get() == "":
                 self.submitbutton.config(text="Please select an answer!", bg = "orange red2",command = "")
                 self.after(2000,lambda:self.submitbutton.config(text="Submit",bg="spring green3",command=lambda:self.CheckAnswer()))
+            # If wrong, then they can't submit another answer for 3 seconds
             else:
                 self.submitbutton.config(text="Incorrect (3)",bg = "orange red2", command = "")
                 self.after(1000,lambda:self.submitbutton.config(text="Incorrect (2)",bg = "orange red2", command = ""))
                 self.after(2000,lambda:self.submitbutton.config(text="Incorrect (1)",bg = "orange red2", command = ""))
                 self.after(3000,lambda:self.submitbutton.config(text="Submit",bg = "spring green3", command=lambda:self.CheckAnswer()))
 
+    # This function is used to refresh the dropdown menu in each individual quiz after the answer list is redefined in each subclass
     def RefreshMenu(self):
+        # The explanation widget is destroyed
         self.explanation.destroy
+        # Explanation is defined again, this time using the updated answerlist and placed in the same spot
         self.explanation = tk.OptionMenu(self,self.useranswer,*self.answerlist)
         self.explanation.place(relx = 0.5,rely=0.7,anchor="center")
         self.explanation.config(font=BUTTONFONT)
 
 #############################################################
-#Quiz classes
+# Quiz classes - instances of the Quiz class/template/master
 
 class Quiz1P1(Quiz):
     def __init__(self,master):
+        # Initalizing the quiz class, so all of the widgets/variables are present
         Quiz.__init__(self,master)
+        # Final quiz is set to false, as this is just a lesson quiz
         self.finalquiz = False
+        # The next frame is defined so if the user gets the question correct the CheckAnswer function can switch to this
         self.nextframe = Quiz1P2
+        # Title is set
         self.title.config(text="Differentiation;Basics")
+        # Possible answers/choices are set
         self.answerlist = ["f'(x) = x² + 103","f'(x) = 0.5x + 4","f'(x) = x + 4", "f'(x) = 99x + 2"]
+        # The question image is set
         self.imagefile.config(file = get_image("quiz1 1.png"))
+        # Menu is refreshed to show the answerlist defined above
         Quiz.RefreshMenu(self)
+        # Correct answer is set, so CheckAnswer has something to compare the user's answer with
         self.correctanswer = "f'(x) = x + 4"
+        # Question number is configured
         self.questionnumber.config(text="Question 1/2")
 
 class Quiz1P2(Quiz):
@@ -831,30 +899,38 @@ class Quiz8P2(Quiz):
         self.correctanswer = "v(0) = 3ms⁻¹"
         self.questionnumber.config(text="Question 2/2")
 
+# This is the congratulations page for each quiz, and displays upon successful completion of a lesson's quiz.
+# Note that it is not an instance of anything, but merely a unique frame; that is because it doesn't share many of the qualites/placements of widgets with a template class
+# Therefore, using a template would mean more lines and more clutter, this was an easier way of doing things
 class QuizCongratulations(tk.Frame):
     def __init__(self,master):
+        # Frametype is defined
         self.frametype = "place"
-        self.userinput = "hello"
         tk.Frame.__init__(self,master)
+        # Background colour is set
         self.config(bg=BGCOLOUR)
+        # Title is set to say congratulations
         self.title = tk.Label(self,text='Congratulations!',font = HEADINGFONT, bg = BGCOLOUR)
         self.title.place(relx = 0.5, rely = 0.1, anchor="center")
+        # Imagefile is set to the dedicated "congratulations" image file
         self.imagefile = tk.PhotoImage(file=get_image("congratulations.png"))      
         self.photolabel = tk.Label(self,image=self.imagefile,borderwidth=0)
         self.photolabel.place(relx=0.5,rely=0.4,anchor="center")
         self.photolabel.img = self.imagefile
+        # A catch-all explanation is written so that this screen can be placed at the end of all of the lesson quizzes
         self.explanation = tk.Label(self,text="Congratulations, you have finished this quiz! Redo this lesson if you feel unsure about it, move on to other lessons if you feel confident, and if you're comfortable with everything then attempt the final quiz! ",font=BUTTONFONT,wraplength = 1000, bg = BGCOLOUR)
         self.explanation.place(relx = 0.5,rely=0.7,anchor="center")
         self.explanation.config(font=BUTTONFONT)
-        self.submitbutton = tk.Button(self,text="Back to Menu",bg="spring green3",command=lambda:master.switch_frame(LessonSelect),font=BUTTONFONT)
-        self.submitbutton.place(relx = 0.5,rely=0.9,anchor="center")
-
+        # Button to back to the main menu is defined and placed bottom centre
+        self.backbutton = tk.Button(self,text="Back to Menu",bg="spring green3",command=lambda:master.switch_frame(LessonSelect),font=BUTTONFONT)
+        self.backbutton.place(relx = 0.5,rely=0.9,anchor="center")
 
 class FinalQuizP1(Quiz):
     def __init__(self,master):
         Quiz.__init__(self,master)
+        # Because this quiz screen is part of the final quiz, this is set to true
         self.finalquiz = True
-        self.firstattempt = True
+        # The number of correct questions is set to 0 here, just incase the user is reattempting the quiz - this ensures that the score count is accurate
         master.FinalQuizScoreCount = 0
         self.nextframe = FinalQuizP2
         self.answerlist = ["f'(x) = 3x² + 4x + 2","f'(x) = 6x + 4","f'(x) = 6x² + 6", "f'(x) = 3x + 4"]
@@ -867,7 +943,6 @@ class FinalQuizP2(Quiz):
     def __init__(self,master):
         Quiz.__init__(self,master)
         self.finalquiz = True
-        self.firstattempt = True
         self.nextframe = FinalQuizP3
         self.answerlist = ["f'(2) = 41","f'(2) = 8","f'(2) = 11","f'(2) = 12"]
         self.imagefile.config(file=get_image("quizfinal 2.png"))
@@ -879,7 +954,6 @@ class FinalQuizP3(Quiz):
     def __init__(self,master):
         Quiz.__init__(self,master)
         self.finalquiz = True
-        self.firstattempt = True
         self.nextframe = FinalQuizP4
         self.answerlist = ["y = 12x - 6","y = 4x + 4","y = 8x - 17","y = x + 2"]
         self.imagefile.config(file=get_image("quizfinal 3.png"))
@@ -891,7 +965,6 @@ class FinalQuizP4(Quiz):
     def __init__(self,master):
         Quiz.__init__(self,master)
         self.finalquiz = True
-        self.firstattempt = True
         self.nextframe = FinalQuizP5
         self.answerlist = ["Increasing","Decreasing","Stationary"]
         self.imagefile.config(file=get_image("quizfinal 4.png"))
@@ -903,7 +976,6 @@ class FinalQuizP5(Quiz):
     def __init__(self,master):
         Quiz.__init__(self,master)
         self.finalquiz = True
-        self.firstattempt = True
         self.nextframe = FinalQuizP6
         self.answerlist = ["Minimum","Maximum"]
         self.imagefile.config(file=get_image("quizfinal 5.png"))
@@ -915,7 +987,6 @@ class FinalQuizP6(Quiz):
     def __init__(self,master):
         Quiz.__init__(self,master)
         self.finalquiz = True
-        self.firstattempt = True
         self.nextframe = FinalQuizP7
         self.answerlist = ["4x²+ 4x + 4","2x² + 4","2x⁴ + 4x + c","2x² + 4x + c"]
         self.imagefile.config(file=get_image("quizfinal 6.png"))
@@ -927,7 +998,6 @@ class FinalQuizP7(Quiz):
     def __init__(self,master):
         Quiz.__init__(self,master)
         self.finalquiz = True
-        self.firstattempt = True
         self.nextframe = FinalQuizP8
         self.answerlist = ["2x² + 2 + c","3x² - 3x + c","3x² + 3x + 4","3x² - 3x - 4"]
         self.imagefile.config(file=get_image("quizfinal 7.png"))
@@ -939,7 +1009,6 @@ class FinalQuizP8(Quiz):
     def __init__(self,master):
         Quiz.__init__(self,master)
         self.finalquiz = True
-        self.firstattempt = True
         self.nextframe = FinalCongratulations
         self.answerlist = ["a(t) = 2ms⁻²","a(t) = 3ms⁻²","a(t) = 4ms⁻²","a(t) = 55ms⁻²"]
         self.imagefile.config(file=get_image("quizfinal 8.png"))
@@ -947,29 +1016,43 @@ class FinalQuizP8(Quiz):
         self.correctanswer = "a(t) = 2ms⁻²"
         self.questionnumber.config(text="Question 8/8")
 
+# This is the congratulations class that runs upon successful completion of the final quiz. 
 class FinalCongratulations(Quiz):
     def __init__(self,master):
+        # Defining frametype
         self.frametype = "place"
-        self.userinput = "hello"
+        # This is the initial reading of the highscore
         with open(get_image(HIGHSCOREFILE),"r+") as TXT_FILE:
             self.highscore = TXT_FILE.readline()
         tk.Frame.__init__(self,master)
+        # Background colour is set
         self.config(bg=BGCOLOUR)
+        # Title is set
         self.title = tk.Label(self,text='Congratulations!',font = HEADINGFONT, bg = BGCOLOUR)
         self.title.place(relx = 0.5, rely = 0.1, anchor="center")
+        # Image is set again to the congratulations image
         self.imagefile = tk.PhotoImage(file=get_image("congratulations.png"))      
         self.photolabel = tk.Label(self,image=self.imagefile,borderwidth=0)
         self.photolabel.place(relx=0.5,rely=0.4,anchor="center")
         self.photolabel.img = self.imagefile
+        # Explanation is set to blank for now, will be changed in the upcoming if/else statement
         self.explanation = tk.Label(self,text="",font=BUTTONFONT,wraplength = 1000, bg = BGCOLOUR)
+        # If the user got a perfect score:
         if int(master.FinalQuizScoreCount) == 8:
+            # Set the highscore to 8
             self.highscore = int(master.FinalQuizScoreCount)
+            # Congratulation them on their perfect score, recommend they go do practice tests as they have finished the content offered in this program
             self.explanation.config(text="Congratulations, you got all 8 questions right on the first try! You have finished all of the lessons within this program, and you should now be comfortable with all of the major topics covered in Level 2 Calculus. Feel free to go back through this program as required, otherwise start doing practice tests!")
+        # If the user set a new high score:
         elif  int(master.FinalQuizScoreCount) > int(self.highscore):
+            # Set the new highscore
             self.highscore = int(master.FinalQuizScoreCount)
+            # Congratulation them, encourge them to try again and get a perfect score
             self.explanation.config(text="Congratulations, you got " + str(master.FinalQuizScoreCount) + " questions right on the first try! This is your new high score! Try again for a better high score!")
+        # If the user equalled their old high score:
         elif int(self.highscore) == int(master.FinalQuizScoreCount):
             self.explanation.config(text="Congratulations, you got " + str(master.FinalQuizScoreCount) + " questions right on the first try! This is equal to your old high score! Try again for a better high score!")
+        # If the user did worse than their high score
         else:
             self.explanation.config(text="Congratulations, you got " + str(master.FinalQuizScoreCount) + " questions right on the first try! Unfortunately, you didn't beat your high score of " + str(self.highscore) + ". Try again for a better high score!")
         self.explanation.place(relx = 0.5,rely=0.7,anchor="center")
@@ -977,6 +1060,7 @@ class FinalCongratulations(Quiz):
         self.backbutton = tk.Button(self,text="Back to Menu",bg="spring green3",command=lambda:self.ExportScore(),font=BUTTONFONT)
         self.backbutton.place(relx = 0.5,rely=0.9,anchor="center")
         
+    # This is run when the user tries to go back to menu; it exports the high score to the txt file (whether it is new or same as the old one) and then switches frames 
     def ExportScore(self):
         with open(get_image(HIGHSCOREFILE),"r+") as TXT_FILE:
             TXT_FILE.write(str(self.highscore))
@@ -984,12 +1068,17 @@ class FinalCongratulations(Quiz):
 
 #Defining the main subroutine
 def main():
+    # App is set equal to the maths object we definied above
     app = Maths()
+    # The resolution of the app is set
     app.geometry("1280x720")
+    # The background colour of the app is set
     app.config(bg=BGCOLOUR)
+    # The option to resize the app manually via clicking and dragging in one of its corners and resize via the button in the top right are both disabled 
     app.resizable(False, False)
+    # Mainloop is run to keep the program running
     app.mainloop()
 
-#Proper, conventional way to run main, prevents main accidentally if the program is ever called
+#Proper, conventional way to run main, prevents main accidentally running if the program is ever called
 if __name__ == '__main__':
     main()
