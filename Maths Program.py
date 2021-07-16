@@ -103,7 +103,16 @@ class LessonTemplate(tk.Frame):
         self.nextbutton.place(relx = 0.8,rely=0.9,anchor="center")
         self.backbutton = tk.Button(self,text="Back",bg="orange red2",font=BUTTONFONT,command=lambda:master.switch_frame(LessonSelect))
         self.backbutton.place(relx = 0.2,rely=0.9,anchor="center")
-
+    
+    def ResetScore(self):
+        with open(get_image(HIGHSCOREFILE),"r+") as TXT_FILE:
+            TXT_FILE.write("0")
+        self.resetbutton.config(text="Reset to 0!",command="")
+        with open(get_image(HIGHSCOREFILE),"r+") as TXT_FILE:
+            self.highscore = TXT_FILE.readline()
+        self.explanation.config(text="This is the final quiz! You should be comfortable with all of the topics and concepts covered in this program before you attempt this. \nYour current high score is: " + str(self.highscore) + ".")
+        self.after(2000,lambda:self.resetbutton.destroy())
+        self.after(2000,lambda:self.pagenumber.config(text="1/1"))
 #############################################################
 #Lesson information classes, where each class is an instance of the template class defined above
 
@@ -195,6 +204,13 @@ class LessonInfo9(LessonTemplate):
         with open(get_image(HIGHSCOREFILE),"r+") as TXT_FILE:
             self.highscore = TXT_FILE.readline()
         self.explanation.config(text="This is the final quiz! You should be comfortable with all of the topics and concepts covered in this program before you attempt this. \nYour current high score is: " + str(self.highscore) + ".")
+        if int(self.highscore) == 0:
+            self.pagenumber.config(text="1/1")
+        elif int(self.highscore) > 0:
+            self.pagenumber.config(text="")
+            self.resetbutton = tk.Button(self,text="Reset high score",bg="spring green3",font=BUTTONFONT,command=lambda:LessonTemplate.ResetScore(self))
+            self.resetbutton.place(relx = 0.5,rely=0.9,anchor="center")
+            
         self.nextbutton.config(text="Start the quiz!",command=lambda:master.switch_frame(FinalQuizP1))
         self.backbutton.config(command=lambda:master.switch_frame(LessonSelect))
 
@@ -588,7 +604,7 @@ class Quiz(tk.Frame):
     def CheckAnswer(self):
         if self.finalquiz == True:
             if self.useranswer.get() == self.correctanswer:
-                self.submitbutton.config(text="Correct!", command = "")
+                self.submitbutton.config(text="Correct!", bg="lawn green",command = "")
                 if self.firstattempt == True: self.master.FinalQuizScoreCount +=1
                 self.after(2000,lambda:self.master.switch_frame(self.nextframe))
             elif self.useranswer.get() == "":
@@ -602,7 +618,7 @@ class Quiz(tk.Frame):
                 self.after(3000,lambda:self.submitbutton.config(text="Submit",bg = "spring green3", command=lambda:self.CheckAnswer()))
         else:
             if self.useranswer.get() == self.correctanswer:
-                self.submitbutton.config(text="Correct!", command = "")
+                self.submitbutton.config(text="Correct!", bg="lawn green",command = "")
                 self.after(2000,lambda:self.master.switch_frame(self.nextframe))
             elif self.useranswer.get() == "":
                 self.submitbutton.config(text="Please select an answer!", bg = "orange red2",command = "")
@@ -959,19 +975,12 @@ class FinalCongratulations(Quiz):
         self.explanation.place(relx = 0.5,rely=0.7,anchor="center")
         self.explanation.config(font=BUTTONFONT)
         self.backbutton = tk.Button(self,text="Back to Menu",bg="spring green3",command=lambda:self.ExportScore(),font=BUTTONFONT)
-        self.backbutton.place(relx = 0.8,rely=0.9,anchor="center")
-        self.resetbutton = tk.Button(self,text="Reset Score",bg="orange red2",command=lambda:self.ResetScore(),font=BUTTONFONT)
-        self.resetbutton.place(relx = 0.2,rely=0.9,anchor="center")
+        self.backbutton.place(relx = 0.5,rely=0.9,anchor="center")
         
     def ExportScore(self):
         with open(get_image(HIGHSCOREFILE),"r+") as TXT_FILE:
             TXT_FILE.write(str(self.highscore))
         self.master.switch_frame(LessonSelect)
-    
-    def ResetScore(self):
-        with open(get_image(HIGHSCOREFILE),"r+") as TXT_FILE:
-            TXT_FILE.write("0")
-        self.resetbutton.config(text="Reset to 0!",command="")
 
 #Defining the main subroutine
 def main():
