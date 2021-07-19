@@ -27,8 +27,8 @@ HIGHSCOREFILE = "values.txt"
 # Images directory - name of the folder in the root path of the program
 IMAGEDIRECTORY = "Images"
 
-# Function to find the images in a filepath of my choosing, to allow assets to be stored in a folder instead of the program's root directory
-# This allows me to simply specify the 
+# Function to find the images in a filepath of my choosing, to allow assets tobe stored in a folder instead of the program's root directory
+# This allows me to simply specify the program
 def get_image(image):
     # Gets the path of the program itself
     dir = os.path.dirname(__file__) 
@@ -634,15 +634,15 @@ class Quiz(tk.Frame):
         # Question number will vary, no point in default
         self.questionnumber = tk.Label(self,text="",bg=BGCOLOUR,font=BUTTONFONT)
         self.questionnumber.place(relx = 0.5,rely=0.9,anchor="center")
-        # Submitting will run the CheckAnswer function, and giving up kicks the user back out to the main menu
-        self.submitbutton = tk.Button(self,text="Submit",bg="spring green3",command=lambda:self.CheckAnswer(),font=BUTTONFONT)
+        # Submitting will run the check_answer function, and giving up kicks the user back out to the main menu
+        self.submitbutton = tk.Button(self,text="Submit",bg="spring green3",command=lambda:self.check_answer(),font=BUTTONFONT)
         self.submitbutton.place(relx = 0.8,rely=0.9,anchor="center")
         self.backbutton = tk.Button(self,text="Give Up",bg="orange red2",command=lambda:master.switch_frame(LessonSelect),font=BUTTONFONT)
         self.backbutton.place(relx = 0.2,rely=0.9,anchor="center")
         
     
     # The subroutine for checking whether the answer is correct and whether it should count as a point
-    def CheckAnswer(self):
+    def check_answer(self):
         # If it is a question in the final quiz:
         if self.finalquiz == True:
             # If the user's answer is the same as the correct answer:
@@ -658,7 +658,7 @@ class Quiz(tk.Frame):
                 # They asked to select an answer by changing the button text, and in 2 seconds the button reverts to normal
                 # Note that this doesn't change the status of firstattempt - a blank submission doesn't count as an attempt
                 self.submitbutton.config(text="Please select an answer!", bg = "orange red2",command = "")
-                self.after(2000,lambda:self.submitbutton.config(text="Submit",bg="spring green3",command=lambda:self.CheckAnswer()))
+                self.after(2000,lambda:self.submitbutton.config(text="Submit",bg="spring green3",command=lambda:self.check_answer()))
             # Else if the user's answer is incorrect:
             else:
                 # Firstattempt is set to false so that any subsequent answers don't count towards the final score
@@ -667,7 +667,7 @@ class Quiz(tk.Frame):
                 self.submitbutton.config(text="Incorrect (3)",bg = "orange red2", command = "")
                 self.after(1000,lambda:self.submitbutton.config(text="Incorrect (2)",bg = "orange red2", command = ""))
                 self.after(2000,lambda:self.submitbutton.config(text="Incorrect (1)",bg = "orange red2", command = ""))
-                self.after(3000,lambda:self.submitbutton.config(text="Submit",bg = "spring green3", command=lambda:self.CheckAnswer()))
+                self.after(3000,lambda:self.submitbutton.config(text="Submit",bg = "spring green3", command=lambda:self.check_answer()))
         # If it is just a normal quiz (i.e part of the lessons)
         else:
             # If the answer is correct, the user is told they are correct and the next frame is switched to
@@ -677,16 +677,16 @@ class Quiz(tk.Frame):
             # If blank, they are told "please selct an answer"
             elif self.useranswer.get() == "":
                 self.submitbutton.config(text="Please select an answer!", bg = "orange red2",command = "")
-                self.after(2000,lambda:self.submitbutton.config(text="Submit",bg="spring green3",command=lambda:self.CheckAnswer()))
+                self.after(2000,lambda:self.submitbutton.config(text="Submit",bg="spring green3",command=lambda:self.check_answer()))
             # If wrong, then they can't submit another answer for 3 seconds
             else:
                 self.submitbutton.config(text="Incorrect (3)",bg = "orange red2", command = "")
                 self.after(1000,lambda:self.submitbutton.config(text="Incorrect (2)",bg = "orange red2", command = ""))
                 self.after(2000,lambda:self.submitbutton.config(text="Incorrect (1)",bg = "orange red2", command = ""))
-                self.after(3000,lambda:self.submitbutton.config(text="Submit",bg = "spring green3", command=lambda:self.CheckAnswer()))
+                self.after(3000,lambda:self.submitbutton.config(text="Submit",bg = "spring green3", command=lambda:self.check_answer()))
 
     # This function is used to refresh the dropdown menu in each individual quiz after the answer list is redefined in each subclass
-    def RefreshMenu(self):
+    def refresh_menu(self):
         # The explanation widget is destroyed
         self.explanation.destroy
         # Explanation is defined again, this time using the updated answerlist and placed in the same spot
@@ -703,7 +703,7 @@ class Quiz1P1(Quiz):
         Quiz.__init__(self,master)
         # Final quiz is set to false, as this is just a lesson quiz
         self.finalquiz = False
-        # The next frame is defined so if the user gets the question correct the CheckAnswer function can switch to this
+        # The next frame is defined so if the user gets the question correct the check_answer function can switch to this
         self.nextframe = Quiz1P2
         # Title is set
         self.title.config(text="Differentiation;Basics")
@@ -712,8 +712,8 @@ class Quiz1P1(Quiz):
         # The question image is set
         self.imagefile.config(file = get_image("quiz1 1.png"))
         # Menu is refreshed to show the answerlist defined above
-        Quiz.RefreshMenu(self)
-        # Correct answer is set, so CheckAnswer has something to compare the user's answer with
+        Quiz.refresh_menu(self)
+        # Correct answer is set, so check_answer has something to compare the user's answer with
         self.correctanswer = "f'(x) = x + 4"
         # Question number is configured
         self.questionnumber.config(text="Question 1/2")
@@ -726,7 +726,7 @@ class Quiz1P2(Quiz):
         self.title.config(text="Differentiation;Basics")
         self.answerlist = ["f'(x) = 4x","f'(x) = 4x + 99","f'(x) = 4x² + 99", "f'(x ) = 2x² + 99x + 99"]
         self.imagefile.config(file = get_image("quiz1 2.png"))
-        Quiz.RefreshMenu(self)
+        Quiz.refresh_menu(self)
         self.correctanswer = "f'(x) = 4x"
         self.questionnumber.config(text="Question 2/2")
 
@@ -738,7 +738,7 @@ class Quiz2P1(Quiz):
         self.title.config(text="Differentiation;Gradients")
         self.answerlist = ["f'(x) = 6x + 3","f'(x) = 2","f'(x) = 4x²", "f'(x) = 2x + 4"]
         self.imagefile.config(file = get_image("quiz2 1.png"))
-        Quiz.RefreshMenu(self)
+        Quiz.refresh_menu(self)
         self.correctanswer = "f'(x) = 2x + 4"
         self.questionnumber.config(text="Question 1/2")
 
@@ -750,7 +750,7 @@ class Quiz2P2(Quiz):
         self.title.config(text="Differentiation;Gradients")
         self.answerlist = ["f'(2) = 10","f'(3) = 14","f'(3) = 12", "f'(3) = 4x + 2"]
         self.imagefile.config(file = get_image("quiz2 2.png"))
-        Quiz.RefreshMenu(self)
+        Quiz.refresh_menu(self)
         self.correctanswer = "f'(3) = 14"
         self.questionnumber.config(text="Question 2/2")
 
@@ -762,7 +762,7 @@ class Quiz3P1(Quiz):
         self.title.config(text="Differentiation;Tangents")
         self.answerlist = ["y = 9x - 5","y = x + 2","y = 10x - 6", "y = x"]
         self.imagefile.config(file = get_image("quiz3 1.png"))
-        Quiz.RefreshMenu(self)
+        Quiz.refresh_menu(self)
         self.correctanswer = "y = 10x - 6"
         self.questionnumber.config(text="Question 1/2")
 
@@ -774,7 +774,7 @@ class Quiz3P2(Quiz):
         self.title.config(text="Differentiation;Tangents")
         self.answerlist = ["y = -x/10 + 27.3","y = 10x + 3","y = x + 2", "y = -x/10 + 30"]
         self.imagefile.config(file = get_image("quiz3 2.png"))
-        Quiz.RefreshMenu(self)
+        Quiz.refresh_menu(self)
         self.correctanswer = "y = -x/10 + 27.3"
         self.questionnumber.config(text="Question 2/2")
 
@@ -786,7 +786,7 @@ class Quiz4P1(Quiz):
         self.title.config(text="Differentiation;Increase/Decrease")
         self.answerlist = ["Increasing","Decreasing","Stationary"]
         self.imagefile.config(file = get_image("quiz4 1.png"))
-        Quiz.RefreshMenu(self)
+        Quiz.refresh_menu(self)
         self.correctanswer = "Decreasing"
         self.questionnumber.config(text="Question 1/2")
 
@@ -798,7 +798,7 @@ class Quiz4P2(Quiz):
         self.title.config(text="Differentiation;Increase/Decrease")
         self.answerlist = ["Increasing","Decreasing","Stationary"]
         self.imagefile.config(file = get_image("quiz4 2.png"))
-        Quiz.RefreshMenu(self)
+        Quiz.refresh_menu(self)
         self.correctanswer = "Stationary"
         self.questionnumber.config(text="Question 2/2")
 
@@ -810,7 +810,7 @@ class Quiz5P1(Quiz):
         self.title.config(text="Differentiation;Min/Max")
         self.answerlist = ["Maximum","Minimum"]
         self.imagefile.config(file = get_image("quiz5 1.png"))
-        Quiz.RefreshMenu(self)
+        Quiz.refresh_menu(self)
         self.correctanswer = "Minimum"
         self.questionnumber.config(text="Question 1/2")
 
@@ -822,7 +822,7 @@ class Quiz5P2(Quiz):
         self.title.config(text="Differentiation;Min/Max")
         self.answerlist = ["Maximum","Minimum"]
         self.imagefile.config(file = get_image("quiz5 2.png"))
-        Quiz.RefreshMenu(self)
+        Quiz.refresh_menu(self)
         self.correctanswer = "Maximum"
         self.questionnumber.config(text="Question 2/2")
 
@@ -834,7 +834,7 @@ class Quiz6P1(Quiz):
         self.title.config(text="Integration;Basics")
         self.answerlist = ["f(x) = x² + 9x + c","f(x) = 2x² + 9x","(fx) = x² + 9x + 1","f(x) = 2x² + 9 + c"]
         self.imagefile.config(file = get_image("quiz6 1.png"))
-        Quiz.RefreshMenu(self)
+        Quiz.refresh_menu(self)
         self.correctanswer = "f(x) = x² + 9x + c"
         self.questionnumber.config(text="Question 1/2")
 
@@ -846,7 +846,7 @@ class Quiz6P2(Quiz):
         self.title.config(text="Integration;Basics")
         self.answerlist = ["f(x) = x²/2 + cx + d","f(x) = x² + c", "f(x) = x² + 2x + d","f(x) = x²/2 + c"]
         self.imagefile.config(file = get_image("quiz6 2.png"))
-        Quiz.RefreshMenu(self)
+        Quiz.refresh_menu(self)
         self.correctanswer = "f(x) = x²/2 + c"
         self.questionnumber.config(text="Question 2/2")
 
@@ -858,7 +858,7 @@ class Quiz7P1(Quiz):
         self.title.config(text="Integration;Functions")
         self.answerlist = ["f(x) = x² + 3x + c","f(x) = x² + 3x", "f(x) = x² + 3x + 3","f(x) = x² + 2x + 3"]
         self.imagefile.config(file = get_image("quiz7 1.png"))
-        Quiz.RefreshMenu(self)
+        Quiz.refresh_menu(self)
         self.correctanswer = "f(x) = x² + 3x"
         self.questionnumber.config(text="Question 1/2")
 
@@ -871,7 +871,7 @@ class Quiz7P2(Quiz):
         self.title.config(text="Integration;Functions")
         self.answerlist = ["f(x) = x²/2 + 4x - 8","f(x) = x² - 4x + 8", "f(x) = x²/2 - 4x + 8","f(x) = x²/2 + c"]
         self.imagefile.config(file = get_image("quiz7 2.png"))
-        Quiz.RefreshMenu(self)
+        Quiz.refresh_menu(self)
         self.correctanswer = "f(x) = x²/2 - 4x + 8"
         self.questionnumber.config(text="Question 2/2")
 
@@ -883,7 +883,7 @@ class Quiz8P1(Quiz):
         self.title.config(text="Integration;Kinematics")
         self.answerlist = ["a(t) = 4ms⁻²","a(t) = 2ms⁻²", "a(t) = 0.5ms⁻²","v(t) = 4tms⁻¹"]
         self.imagefile.config(file = get_image("quiz8 1.png"))
-        Quiz.RefreshMenu(self)
+        Quiz.refresh_menu(self)
         self.correctanswer = "a(t) = 4ms⁻²"
         self.questionnumber.config(text="Question 1/2")
 
@@ -895,7 +895,7 @@ class Quiz8P2(Quiz):
         self.title.config(text="Integration;Kinematics")
         self.answerlist = ["s(0) = 0m","v(0) = 4ms⁻¹", "v(t) = 2tms⁻¹","v(0) = 3ms⁻¹"]
         self.imagefile.config(file = get_image("quiz8 2.png"))
-        Quiz.RefreshMenu(self)
+        Quiz.refresh_menu(self)
         self.correctanswer = "v(0) = 3ms⁻¹"
         self.questionnumber.config(text="Question 2/2")
 
@@ -935,7 +935,7 @@ class FinalQuizP1(Quiz):
         self.nextframe = FinalQuizP2
         self.answerlist = ["f'(x) = 3x² + 4x + 2","f'(x) = 6x + 4","f'(x) = 6x² + 6", "f'(x) = 3x + 4"]
         self.imagefile.config(file=get_image("quizfinal 1.png"))
-        Quiz.RefreshMenu(self)
+        Quiz.refresh_menu(self)
         self.correctanswer = "f'(x) = 6x + 4"
         self.questionnumber.config(text="Question 1/8")
 
@@ -946,7 +946,7 @@ class FinalQuizP2(Quiz):
         self.nextframe = FinalQuizP3
         self.answerlist = ["f'(2) = 41","f'(2) = 8","f'(2) = 11","f'(2) = 12"]
         self.imagefile.config(file=get_image("quizfinal 2.png"))
-        Quiz.RefreshMenu(self)
+        Quiz.refresh_menu(self)
         self.correctanswer = "f'(2) = 11"
         self.questionnumber.config(text="Question 2/8")
 
@@ -957,7 +957,7 @@ class FinalQuizP3(Quiz):
         self.nextframe = FinalQuizP4
         self.answerlist = ["y = 12x - 6","y = 4x + 4","y = 8x - 17","y = x + 2"]
         self.imagefile.config(file=get_image("quizfinal 3.png"))
-        Quiz.RefreshMenu(self)
+        Quiz.refresh_menu(self)
         self.correctanswer = "y = 12x - 6"
         self.questionnumber.config(text="Question 3/8")
 
@@ -968,7 +968,7 @@ class FinalQuizP4(Quiz):
         self.nextframe = FinalQuizP5
         self.answerlist = ["Increasing","Decreasing","Stationary"]
         self.imagefile.config(file=get_image("quizfinal 4.png"))
-        Quiz.RefreshMenu(self)
+        Quiz.refresh_menu(self)
         self.correctanswer = "Increasing"
         self.questionnumber.config(text="Question 4/8")
 
@@ -979,7 +979,7 @@ class FinalQuizP5(Quiz):
         self.nextframe = FinalQuizP6
         self.answerlist = ["Minimum","Maximum"]
         self.imagefile.config(file=get_image("quizfinal 5.png"))
-        Quiz.RefreshMenu(self)
+        Quiz.refresh_menu(self)
         self.correctanswer = "Maximum"
         self.questionnumber.config(text="Question 5/8")
 
@@ -990,7 +990,7 @@ class FinalQuizP6(Quiz):
         self.nextframe = FinalQuizP7
         self.answerlist = ["4x²+ 4x + 4","2x² + 4","2x⁴ + 4x + c","2x² + 4x + c"]
         self.imagefile.config(file=get_image("quizfinal 6.png"))
-        Quiz.RefreshMenu(self)
+        Quiz.refresh_menu(self)
         self.correctanswer = "2x² + 4x + c"
         self.questionnumber.config(text="Question 6/8")
 
@@ -1001,7 +1001,7 @@ class FinalQuizP7(Quiz):
         self.nextframe = FinalQuizP8
         self.answerlist = ["2x² + 2 + c","3x² - 3x + c","3x² + 3x + 4","3x² - 3x - 4"]
         self.imagefile.config(file=get_image("quizfinal 7.png"))
-        Quiz.RefreshMenu(self)
+        Quiz.refresh_menu(self)
         self.correctanswer = "3x² - 3x - 4"
         self.questionnumber.config(text="Question 7/8")
 
@@ -1012,7 +1012,7 @@ class FinalQuizP8(Quiz):
         self.nextframe = FinalCongratulations
         self.answerlist = ["a(t) = 2ms⁻²","a(t) = 3ms⁻²","a(t) = 4ms⁻²","a(t) = 55ms⁻²"]
         self.imagefile.config(file=get_image("quizfinal 8.png"))
-        Quiz.RefreshMenu(self)
+        Quiz.refresh_menu(self)
         self.correctanswer = "a(t) = 2ms⁻²"
         self.questionnumber.config(text="Question 8/8")
 
@@ -1057,11 +1057,11 @@ class FinalCongratulations(Quiz):
             self.explanation.config(text="Congratulations, you got " + str(master.FinalQuizScoreCount) + " questions right on the first try! Unfortunately, you didn't beat your high score of " + str(self.highscore) + ". Try again for a better high score!")
         self.explanation.place(relx = 0.5,rely=0.7,anchor="center")
         self.explanation.config(font=BUTTONFONT)
-        self.backbutton = tk.Button(self,text="Back to Menu",bg="spring green3",command=lambda:self.ExportScore(),font=BUTTONFONT)
+        self.backbutton = tk.Button(self,text="Back to Menu",bg="spring green3",command=lambda:self.export_score(),font=BUTTONFONT)
         self.backbutton.place(relx = 0.5,rely=0.9,anchor="center")
         
     # This is run when the user tries to go back to menu; it exports the high score to the txt file (whether it is new or same as the old one) and then switches frames 
-    def ExportScore(self):
+    def export_score(self):
         with open(get_image(HIGHSCOREFILE),"r+") as TXT_FILE:
             TXT_FILE.write(str(self.highscore))
         self.master.switch_frame(LessonSelect)
