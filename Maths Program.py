@@ -359,7 +359,7 @@ class Lesson1P5(LessonTemplate):
         self.imagefile.config(file=get_image("congratulations.png"))
         self.pagenumber.config(text="6/6")
         self.explanation.config(text=
-            "Congratulations, you finished this lesson! + " 
+            "Congratulations, you finished this lesson! " +
             "You should now know how to differentiate a quadratic equation. " + 
             "Go back through the lesson if you're unsure on anything, otherwise take the quiz!")
         self.nextbutton.config(text="Take the Quiz!",command=lambda:master.switch_frame(Quiz1P1))
