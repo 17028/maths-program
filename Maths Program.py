@@ -861,6 +861,8 @@ class Quiz(tk.Frame):
         self.explanation = tk.OptionMenu(self,self.useranswer,*self.answerlist)
         self.explanation.place(relx = 0.5,rely=0.7,anchor="center")
         self.explanation.config(font=BUTTONFONT)
+        self.options = self.nametowidget(self.explanation.menuname)
+        self.options.config(font=BUTTONFONT)
 
 #############################################################
 # Quiz classes - instances of the Quiz class/template/master
