@@ -42,7 +42,7 @@ class Maths(tk.Tk):
         tk.Tk.__init__(self)
         self._frame = None
         self.switch_frame(TitleScreen)
-        self.title("L2 Calculus Program")
+        self.title("NCEA L2 Calculus")
 
     # The frame switch method
     def switch_frame(self,frame_class):
@@ -66,7 +66,7 @@ class TitleScreen(tk.Frame):
         self.frametype = "grid"
         tk.Frame.__init__(self,master)
         self.config(bg=BGCOLOUR)
-        tk.Label(self,text="Calculus",font=TITLEFONT,bg=BGCOLOUR) .grid(column=1,pady=100)
+        tk.Label(self,text="NCEA L2 Calculus",font=TITLEFONT,bg=BGCOLOUR) .grid(column=1,pady=100)
         tk.Button(self,text="Start",font=BUTTONFONT,bg="spring green3",width = BUTTONWIDTH,
             height = BUTTONHEIGHT,command=lambda:master.switch_frame(LessonSelect)) .grid(column=1)
         tk.Label(self,text="",bg=BGCOLOUR) .grid(column=1)
@@ -1286,6 +1286,8 @@ def main():
     # The maximize/minimize button is disabled
     # The resize app from corner option is also disabled 
     app.resizable(False, False)
+    # Setting the programs icon to a custom one
+    app.iconbitmap(get_image("maths.ico"))
     # Mainloop is run to keep the program running
     app.mainloop()
 
