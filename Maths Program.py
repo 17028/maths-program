@@ -66,12 +66,34 @@ class TitleScreen(tk.Frame):
         self.frametype = "grid"
         tk.Frame.__init__(self,master)
         self.config(bg=BGCOLOUR)
-        tk.Label(self,text="NCEA L2 Calculus",font=TITLEFONT,bg=BGCOLOUR) .grid(column=1,pady=100)
+        tk.Label(self,text="NCEA L2 Calculus",font=TITLEFONT,bg=BGCOLOUR) .grid(column=1,pady=50)
         tk.Button(self,text="Start",font=BUTTONFONT,bg="spring green3",width = BUTTONWIDTH,
-            height = BUTTONHEIGHT,command=lambda:master.switch_frame(LessonSelect)) .grid(column=1)
-        tk.Label(self,text="",bg=BGCOLOUR) .grid(column=1)
+            height = BUTTONHEIGHT,command=lambda:master.switch_frame(LessonSelect)) .grid(column=1,pady=20)
+        tk.Button(self,text="Help",font=BUTTONFONT,bg="coral",width = BUTTONWIDTH,
+            height = BUTTONHEIGHT,command=lambda:master.switch_frame(HelpScreen)) .grid(column=1,pady=20)
         tk.Button(self,text="Quit",font=BUTTONFONT,bg="orange red2",width = BUTTONWIDTH,
-            height = BUTTONHEIGHT,command=quit) .grid(column=1,pady=30)
+            height = BUTTONHEIGHT,command=quit) .grid(column=1,pady=20)
+
+class HelpScreen(tk.Frame):
+    def __init__(self,master):
+        self.frametype = "grid"
+        tk.Frame.__init__(self,master)
+        self.config(bg=BGCOLOUR)
+        tk.Label(self,text="Help",font=TITLEFONT,bg=BGCOLOUR) .grid(column=1,pady=20)
+        tk.Label(self,text=
+            "This program is intended to teach key aspects of the NCEA Level 2 calculus topic. " + 
+            "There are 8 lessons, two questions at the end of each lesson about the lesson's content, " + 
+            "and a final quiz with 8 questions. The lessons are intended to be done in order (1-8), " + 
+            "and the final quiz done after all lessons are completed. " + 
+            "If you get a question right in the final quiz on your first try, " + 
+            "then it counts towards your score. Your high score is kept track of, " + 
+            "and can be reset before taking the final quiz. Once you have finished " + 
+            "the final quiz, it is recommended that you start doing practice questions " +
+            "from workbooks or past exams, which can be found on the NCEA website. " + 
+            "Good luck and have fun learning about the wonders of calculus!",
+            font=BUTTONFONT,wraplength = 1000, bg = BGCOLOUR) .grid(column = 1, pady = 50)
+        tk.Button(self,text="Back",font=BUTTONFONT,bg="orange red2",width = BUTTONWIDTH,
+            height = BUTTONHEIGHT,command=lambda:master.switch_frame(TitleScreen)) .grid(column=1,pady=20)
 
 # Lesson select screen widgets - again, no template because there is only one of this type of page
 class LessonSelect(tk.Frame):
