@@ -394,9 +394,9 @@ class Lesson2P1(LessonTemplate):
         self.imagefile.config(file=get_image("lesson2 1.png"))
         self.pagenumber.config(text="2/5")
         self.explanation.config(text=
-            "The graident of an equation is the rate of change for that equation. " + 
+            "The gradient of an equation is the rate of change for that equation. " + 
             "Some equations have a constant rate of change (in the form y = mx + c), " + 
-            "however quadratics have a constantly changing graident.")
+            "however quadratics have a constantly changing gradient.")
         self.nextbutton.config(command=lambda:master.switch_frame(Lesson2P2))
         self.backbutton.config(command=lambda:master.switch_frame(LessonInfo2))
 
@@ -628,8 +628,8 @@ class Lesson6P1(LessonTemplate):
         self.imagefile.config(file=get_image("lesson6 1.png"))
         self.pagenumber.config(text="2/5")
         self.explanation.config(text=
-            "You can think of integration as the opposite of differenatiation. If you have " + 
-            "the graident of an equation, you can integrate it to find the original equation. " + 
+            "You can think of integration as the opposite of differentiation. If you have " + 
+            "the gradient of an equation, you can integrate it to find the original equation. " + 
             "Integration is sometimes called anti differentiation.")
         self.nextbutton.config(command=lambda:master.switch_frame(Lesson6P2))
         self.backbutton.config(command=lambda:master.switch_frame(LessonInfo6))
@@ -776,9 +776,9 @@ class Quiz(tk.Frame):
         self.answerlist = [""]
         # Same as above, no point in default
         self.correctanswer = ""
-        # Setting frametype for the swich frame function
+        # Setting frametype for the switch frame function
         self.frametype = "place"
-        # Background colour is set to a constant variable for consistenty
+        # Background colour is set to a constant variable for consistency
         self.config(bg=BGCOLOUR)
         # This is for the final quizzes - boolean is used to check if it is the user's first attempt or not
         self.firstattempt = True
@@ -822,7 +822,7 @@ class Quiz(tk.Frame):
         if self.finalquiz == True:
             # If the user's answer is the same as the correct answer:
             if self.useranswer.get() == self.correctanswer:
-                # Button changes to say correct and disply a different shade of green
+                # Button changes to say correct and display a different shade of green
                 self.submitbutton.config(text="Correct!", bg="lawn green",command = "")
                 # IF it is the user's first attempt, then score count is upped
                 if self.firstattempt == True: self.master.FinalQuizScoreCount +=1
@@ -853,11 +853,11 @@ class Quiz(tk.Frame):
                     text="Submit",bg = "spring green3", command=lambda:self.check_answer()))
         # If it is just a normal quiz (i.e part of the lessons)
         else:
-            # If the answer is correct, the user is told they are correct and the next frame is switched to
+            # If the answer is correct, the user is told they are correct the frame is switched 
             if self.useranswer.get() == self.correctanswer:
                 self.submitbutton.config(text="Correct!", bg="lawn green",command = "")
                 self.after(2000,lambda:self.master.switch_frame(self.nextframe))
-            # If blank, they are told "please selct an answer"
+            # If blank, they are told "please select an answer"
             elif self.useranswer.get() == "":
                 self.submitbutton.config(text="Please select an answer!",
                     bg = "orange red2",command = "")
@@ -875,7 +875,7 @@ class Quiz(tk.Frame):
                     text="Submit",bg = "spring green3", command=lambda:self.check_answer()))
 
     # This function is used to refresh the dropdown menu in each individual quiz
-    # This is doneafter the answer list is redefined in each subclass
+    # This is done after the answer list is redefined in each subclass
     def refresh_menu(self):
         # The explanation widget is destroyed
         self.explanation.destroy
@@ -891,7 +891,7 @@ class Quiz(tk.Frame):
 
 class Quiz1P1(Quiz):
     def __init__(self,master):
-        # Initalizing the quiz class, so all of the widgets/variables are present
+        # Initializing the quiz class, so all of the widgets/variables are present
         Quiz.__init__(self,master)
         # Final quiz is set to false, as this is just a lesson quiz
         self.finalquiz = False
@@ -1104,7 +1104,7 @@ class Quiz8P2(Quiz):
 
 # This is the congratulations page for each quiz, and displays upon successful completion of a lesson's quiz.
 # Note that it is not an instance of anything, but merely a unique frame
-# This is because it doesn't share many of the qualites/placements of widgets with a template class
+# This is because it doesn't share many of the qualities/placements of widgets with a template class
 # Therefore, using a template would mean more lines and more clutter, this was an easier way of doing things
 class QuizCongratulations(tk.Frame):
     def __init__(self,master):
@@ -1254,7 +1254,7 @@ class FinalCongratulations(Quiz):
             self.highscore = int(master.FinalQuizScoreCount)
             # First congratulate them on their perfect score
             # Then recommend they go do practice tests
-            # This is becausethey have finished the content offered in this program
+            # This is because they have finished the content offered in this program
             self.explanation.config(text=
                 "Congratulations, you got all 8 questions right on the first try! " + 
                 "You have finished all of the lessons within this program, " + 
@@ -1298,7 +1298,7 @@ class FinalCongratulations(Quiz):
 
 #Defining the main subroutine
 def main():
-    # App is set equal to the maths object we definied above
+    # App is set equal to the maths object we defined above
     app = Maths()
     # The resolution of the app is set
     app.geometry("1280x720")
