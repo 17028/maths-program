@@ -10,7 +10,7 @@ HEADINGFONT = "Consolas",50
 BUTTONFONT = "Arial",20
 BGCOLOUR = "light grey"
 
-# Selection Screen Constants
+# Selection screen constants
 BUTTONGAPX = 50
 BUTTONGAPY = 20
 BACKBUTTONGAPY = 40
@@ -68,9 +68,11 @@ class TitleScreen(tk.Frame):
         self.config(bg=BGCOLOUR)
         tk.Label(self,text="NCEA L2 Calculus",font=TITLEFONT,bg=BGCOLOUR) .grid(column=1,pady=50)
         tk.Button(self,text="Start",font=BUTTONFONT,bg="spring green3",width = BUTTONWIDTH,
-            height = BUTTONHEIGHT,command=lambda:master.switch_frame(LessonSelect)) .grid(column=1,pady=20)
+            height = BUTTONHEIGHT,
+            command=lambda:master.switch_frame(LessonSelect)) .grid(column=1,pady=20)
         tk.Button(self,text="Help",font=BUTTONFONT,bg="coral",width = BUTTONWIDTH,
-            height = BUTTONHEIGHT,command=lambda:master.switch_frame(HelpScreen)) .grid(column=1,pady=20)
+            height = BUTTONHEIGHT,
+            command=lambda:master.switch_frame(HelpScreen)) .grid(column=1,pady=20)
         tk.Button(self,text="Quit",font=BUTTONFONT,bg="orange red2",width = BUTTONWIDTH,
             height = BUTTONHEIGHT,command=quit) .grid(column=1,pady=20)
 
@@ -164,7 +166,7 @@ class LessonTemplate(tk.Frame):
         self.backbutton = tk.Button(self,text="Back",bg="orange red2",font=BUTTONFONT)
         self.backbutton.place(relx = 0.2,rely=0.9,anchor="center")
 
-#############################################################
+###################################################################################################
 
 #Lesson information classes, where each class is an instance of the template class defined above
 class LessonInfo1(LessonTemplate):
@@ -318,7 +320,7 @@ class LessonInfo9(LessonTemplate):
         self.after(2000,lambda:self.pagenumber.config(text="1/1"))
 
 
-#############################################################
+###################################################################################################
 # Lesson classes, again where each class is an instance of the template class
 # These don't differ greatly from the lesson template pages
 
@@ -886,7 +888,7 @@ class Quiz(tk.Frame):
         self.options = self.nametowidget(self.explanation.menuname)
         self.options.config(font=BUTTONFONT)
 
-#############################################################
+###################################################################################################
 # Quiz classes - instances of the Quiz class/template/master
 
 class Quiz1P1(Quiz):
@@ -1133,6 +1135,9 @@ class QuizCongratulations(tk.Frame):
         self.backbutton = tk.Button(self,text="Back to Menu",bg="spring green3",
             command=lambda:master.switch_frame(LessonSelect),font=BUTTONFONT)
         self.backbutton.place(relx = 0.5,rely=0.9,anchor="center")
+
+###################################################################################################
+# Pages for the final quiz, these pages are again all instances of the quiz class
 
 class FinalQuizP1(Quiz):
     def __init__(self,master):
