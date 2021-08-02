@@ -18,7 +18,7 @@ SSBUTTONWIDTH = 20
 SSBUTTONHEIGHT = 4
 DIFFBG = "spring green3"
 INTBG = "royal blue2"
-SMALLBUTTONFONT = "Arial"
+SMALLBUTTONFONT = "Arial",12
 
 # High score file
 HIGHSCOREFILE = "values.txt"
