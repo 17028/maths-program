@@ -1,6 +1,7 @@
 import tkinter as tk
 from tkinter.constants import BOTH, TRUE
 import os
+import sys
 
 # Main menu constants
 BUTTONHEIGHT = 2
@@ -31,10 +32,18 @@ IMAGEDIRECTORY = "Images"
 # This allows me to simply specify the program
 def get_image(image):
     # Gets the path of the program itself
-    dir = os.path.dirname(__file__) 
     # Finding a filepath in the program's directory
-    filename = os.path.join(dir, IMAGEDIRECTORY,str(image)) 
-    return filename    
+    filename = resource_path(image)
+    return filename
+
+def resource_path(relative_path):
+    try:
+        base_path = sys._MEIPASS
+    except Exception:
+        base_path = os.path.abspath(".")
+    print(base_path)
+    filepath = os.path.join(base_path, IMAGEDIRECTORY, str(relative_path))
+    return filepath   
 
 #T he main class, defining the root window
 class Maths(tk.Tk):
@@ -74,7 +83,7 @@ class TitleScreen(tk.Frame):
             height = BUTTONHEIGHT,
             command=lambda:master.switch_frame(HelpScreen)) .grid(column=1,pady=20)
         tk.Button(self,text="Quit",font=BUTTONFONT,bg="orange red2",width = BUTTONWIDTH,
-            height = BUTTONHEIGHT,command=quit) .grid(column=1,pady=20)
+            height = BUTTONHEIGHT,command=lambda:sys.exit()) .grid(column=1,pady=20)
 
 class HelpScreen(tk.Frame):
     def __init__(self,master):
