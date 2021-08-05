@@ -1300,15 +1300,17 @@ class FinalCongratulations(Quiz):
         self.explanation.place(relx = 0.5,rely=0.7,anchor="center")
         self.explanation.config(font=BUTTONFONT)
         self.backbutton = tk.Button(self,text="Back to Menu",bg="spring green3",
-            command=lambda:self.export_score(),font=BUTTONFONT)
+            command=lambda:self.master.switch_frame(LessonSelect),font=BUTTONFONT)
         self.backbutton.place(relx = 0.5,rely=0.9,anchor="center")
+        # Saving the score immediately so that the user can't close the program after a highscore
+        # Previously it was only saved when they clicked a button, but now it saves automatically
+        self.export_score()
         
     # This is run when the user tries to go back to menu
     # It exports the high score to the txt file (whether it is new or the same) and then switches frames
     def export_score(self):
         with open(get_image(HIGHSCOREFILE),"r+") as TXT_FILE:
             TXT_FILE.write(str(self.highscore))
-        self.master.switch_frame(LessonSelect)
 
 #Defining the main subroutine
 def main():
